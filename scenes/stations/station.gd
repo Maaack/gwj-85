@@ -12,6 +12,5 @@ const CARDINAL_DIRECTIONS : Array = [
 		Vector2.RIGHT
 	]
 
-
 @export var resources : int = 6
 @export var health : int = 10

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://k4l4k4ev6t7x"]
+[gd_scene load_steps=5 format=3 uid="uid://k4l4k4ev6t7x"]
 
 [ext_resource type="Texture2D" uid="uid://cebi0is4lsup4" path="res://assets/sprites/ship_A.png" id="1_3lgnh"]
 [ext_resource type="Script" uid="uid://cl2lgwr2etn22" path="res://scenes/player_character/player_controller.gd" id="2_3lgnh"]
+[ext_resource type="Script" uid="uid://bn2dqhc21gex6" path="res://scenes/player_character/fire_controller.gd" id="3_y1h0s"]
+[ext_resource type="PackedScene" uid="uid://dy4jpp8ac8ixh" path="res://scenes/bullets/bullet.tscn" id="4_ev6t3"]
 
 [node name="Player" type="CharacterBody2D"]
 
@@ -14,6 +16,11 @@ texture = ExtResource("1_3lgnh")
 script = ExtResource("2_3lgnh")
 move_speed = 20.0
 always_moving = true
+
+[node name="FireController" type="Node" parent="."]
+script = ExtResource("3_y1h0s")
+bullet_scene = ExtResource("4_ev6t3")
+spawn_offset = Vector2(5, 0)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 rotation = 1.5707964
