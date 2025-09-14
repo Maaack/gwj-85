@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://k4l4k4ev6t7x"]
+
+[ext_resource type="Texture2D" uid="uid://cebi0is4lsup4" path="res://assets/sprites/ship_A.png" id="1_3lgnh"]
+[ext_resource type="Script" uid="uid://cl2lgwr2etn22" path="res://scenes/player_character/player_controller.gd" id="2_3lgnh"]
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+rotation = 1.5707964
+texture = ExtResource("1_3lgnh")
+
+[node name="PlayerController" type="Node" parent="."]
+script = ExtResource("2_3lgnh")
+move_speed = 20.0
+always_moving = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = 1.5707964
+polygon = PackedVector2Array(0, -11, 15, 4, 8, 11, -8, 11, -15, 4)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)

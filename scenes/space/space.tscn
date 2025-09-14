@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dihrvlelgw1hq"]
+
+[ext_resource type="PackedScene" uid="uid://b66n0eejsls3y" path="res://addons/ninetailsrabbit.pixel_space_background_generator/src/pixel_space_background_generator.tscn" id="1_ugvpa"]
+[ext_resource type="PackedScene" uid="uid://k4l4k4ev6t7x" path="res://scenes/player_character/player.tscn" id="2_x217o"]
+[ext_resource type="PackedScene" uid="uid://blmqu1s4cnie5" path="res://scenes/stations/station.tscn" id="3_x217o"]
+
+[node name="Space" type="Node"]
+
+[node name="PixelSpaceBackgroundGenerator" parent="." instance=ExtResource("1_ugvpa")]
+script = null
+
+[node name="Player" parent="." instance=ExtResource("2_x217o")]
+
+[node name="Station" parent="." instance=ExtResource("3_x217o")]
+position = Vector2(154, 85)
