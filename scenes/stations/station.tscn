@@ -105,7 +105,7 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 2
 terrain_set_0/terrain_0/name = "StationParts"
-terrain_set_0/terrain_0/color = Color(0.51755786, 0.25178924, 0.6094028, 1)
+terrain_set_0/terrain_0/color = Color(0.517558, 0.251789, 0.609403, 1)
 sources/1 = SubResource("TileSetAtlasSource_3ic5c")
 
 [node name="Station" type="StaticBody2D"]
@@ -114,8 +114,16 @@ script = ExtResource("1_p2oen")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jc6sy")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="StationParts" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
 texture_filter = 1
-position = Vector2(8, 8)
-tile_map_data = PackedByteArray("AAD/////AQACAAMAAAABAP//AQABAAAAAAAAAP//AQABAAAAAAACAP//AQAAAAMAAAADAP//AQABAAAAAAAEAP//AQADAAAAAAD+////AQABAAAAAAD9////AQABAAAAAAD8////AQAAAAEAAAD///3/AQAAAAMAAAD///7/AQAAAAAAAAAAAP3/AQACAAAAAAAAAPz/AQAAAAEAAAABAPz/AQABAAAAAAACAPz/AQADAAAAAAAEAP3/AQACAAAAAAAEAPz/AQAAAAIAAAADAP3/AQABAAAAAAACAP3/AQABAAEAAAD+//3/AQABAAAAAAD9//3/AQABAAAAAAD8//3/AQACAAIAAAD7//3/AQABAAAAAAD8//z/AQAAAAAAAAD8//v/AQAAAAIAAAACAAAAAQAAAAAAAAACAAEAAQAAAAAAAAACAAIAAQACAAEAAAAEAAAAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAIAAQACAAEAAAD8/wAAAQADAAIAAAD8/wEAAQAAAAAAAAD8/wIAAQACAAEAAAD7/wAAAQABAAAAAAD6/wAAAQABAAAAAAD5/wAAAQAAAAEAAAD5/wEAAQACAAAAAAD4/wEAAQAAAAEAAAD4/wIAAQACAAEAAAD6//3/AQABAAAAAAD5//3/AQABAAAAAAD4//7/AQACAAAAAAD3//7/AQAAAAEAAAD3////AQACAAEAAAD4//3/AQAAAAEAAAD//wAAAQAAAAAAAAD//wEAAQAAAAAAAAD//wIAAQAAAAAAAAD//wMAAQACAAMAAAD//wQAAQACAAEAAAD+/wMAAQABAAIAAAAAAAMAAQADAAEAAAA=")
+position = Vector2(-8, -8)
+tile_map_data = PackedByteArray("AAAAAAAAAQACAAMAAAAAAAEAAQAAAAAAAAAAAAIAAQABAAEAAAABAAIAAQADAAEAAAAAAP//AQAAAAAAAAAAAP7/AQAAAAIAAAABAAAAAQABAAAAAAD//wAAAQABAAAAAAD+/wAAAQABAAIAAAACAAAAAQADAAEAAAA=")
 tile_set = SubResource("TileSet_fbgwf")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

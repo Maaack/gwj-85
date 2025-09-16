@@ -9,7 +9,7 @@
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-rotation = 1.5707964
+rotation = 1.5708
 texture = ExtResource("1_3lgnh")
 
 [node name="PlayerController" type="Node" parent="."]
@@ -21,9 +21,10 @@ always_moving = true
 script = ExtResource("3_y1h0s")
 bullet_scene = ExtResource("4_ev6t3")
 spawn_offset = Vector2(5, 0)
+spawn_speed = 50.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-rotation = 1.5707964
+rotation = 1.5708
 polygon = PackedVector2Array(0, -11, 15, 4, 8, 11, -8, 11, -15, 4)
 
 [node name="Camera2D" type="Camera2D" parent="."]
