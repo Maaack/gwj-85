@@ -4,8 +4,14 @@ extends CharacterBody2D
 
 @onready var health_component = %HealthComponent
 
-func add_resource(amount : int = 1) -> void:
+func remove_all_resources() -> int:
+	var return_value := resources
+	resources = 0
+	return return_value
+
+func add_resource(amount : int = 1) -> bool:
 	resources += amount
+	return true
 
 func damage(amount : float) -> void:
 	health_component.damage(amount)

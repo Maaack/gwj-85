@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://c24inooqjqpcu" path="res://scenes/stations/station.gd" id="1_p2oen"]
 [ext_resource type="Texture2D" uid="uid://dhbyaxm3n57rj" path="res://assets/sprites/white-station-piskel-v2.png" id="2_p2oen"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jc6sy"]
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ic5c"]
 texture = ExtResource("2_p2oen")
 0:0/0 = 0
@@ -108,11 +106,10 @@ terrain_set_0/terrain_0/name = "StationParts"
 terrain_set_0/terrain_0/color = Color(0.517558, 0.251789, 0.609403, 1)
 sources/1 = SubResource("TileSetAtlasSource_3ic5c")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_p2oen"]
+
 [node name="Station" type="StaticBody2D"]
 script = ExtResource("1_p2oen")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_jc6sy")
 
 [node name="StationParts" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
@@ -126,4 +123,12 @@ wait_time = 5.0
 one_shot = true
 autostart = true
 
+[node name="FriendlyArea2D" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FriendlyArea2D"]
+shape = SubResource("CircleShape2D_p2oen")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="FriendlyArea2D" to="." method="_on_friendly_area_2d_body_entered"]

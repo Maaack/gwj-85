@@ -161,6 +161,7 @@ func _expand_station(expand_max : int = 0) -> int:
 		var cellv = optional_cells.pop_back()
 		_expand_station_with_part(cellv)
 		expanded += 1
+	resources -= expanded
 	return expanded
 
 func _on_timer_timeout():
@@ -169,3 +170,9 @@ func _on_timer_timeout():
 func _ready():
 	create_pathfinding_points()
 	_map_parts_connected_to_center()
+
+
+func _on_friendly_area_2d_body_entered(body):
+	if body.has_method("remove_all_resources"):
+		resources += body.remove_all_resources()
+		_expand_station(4)
