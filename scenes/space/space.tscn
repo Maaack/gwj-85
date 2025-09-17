@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dihrvlelgw1hq"]
+[gd_scene load_steps=6 format=3 uid="uid://dihrvlelgw1hq"]
 
 [ext_resource type="Script" uid="uid://06q0y3pvo6ae" path="res://scenes/space/space.gd" id="1_718x5"]
 [ext_resource type="PackedScene" uid="uid://b66n0eejsls3y" path="res://addons/ninetailsrabbit.pixel_space_background_generator/src/pixel_space_background_generator.tscn" id="1_ugvpa"]
 [ext_resource type="PackedScene" uid="uid://k4l4k4ev6t7x" path="res://scenes/player_character/player.tscn" id="2_x217o"]
 [ext_resource type="PackedScene" uid="uid://blmqu1s4cnie5" path="res://scenes/stations/station.tscn" id="3_x217o"]
+[ext_resource type="PackedScene" uid="uid://b0bfytfwc4v4t" path="res://scenes/asteroids/asteroid.tscn" id="5_0a2q3"]
 
 [node name="Space" type="Node"]
 script = ExtResource("1_718x5")
@@ -15,6 +16,11 @@ script = null
 collision_mask = 12
 
 [node name="Station" parent="." instance=ExtResource("3_x217o")]
-position = Vector2(154, 85)
+position = Vector2(155, 85)
 collision_layer = 2
 collision_mask = 0
+
+[node name="Asteroid" parent="." instance=ExtResource("5_0a2q3")]
+position = Vector2(155, 0)
+collision_layer = 5
+collision_mask = 15

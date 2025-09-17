@@ -144,8 +144,6 @@ func _expand_station_with_part(cellv : Vector2i):
 	if not _is_cell_buildable(cellv):
 		return
 	station_parts.set_cells_terrain_connect([cellv], 0, 0)
-	#var _surrounding_cells = station_parts.get_surrounding_cells(cellv)
-	#_surrounding_cells.append(cellv)
 
 func _expand_station(expand_max : int = 0) -> int:
 	var extra_resources := resources
