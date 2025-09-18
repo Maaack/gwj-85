@@ -11,10 +11,7 @@ extends RigidBody2D
 @onready var sprite_2d = %Sprite2D
 @onready var collision_shape_2d = %CollisionShape2D
 
-func _on_body_entered(body: Node2D):
-	if body is Asteroid2D: return
-	if body.has_method("damage"):
-		body.damage(pow(2, game_mass))
+func damage(_amount : int = 1):
 	if game_mass > 1:
 		for piece_iter in range(pieces):
 			var asteroid_instance := self.duplicate()
@@ -29,6 +26,12 @@ func _on_body_entered(body: Node2D):
 		resource_instance.global_position = global_position
 		GameEvents.object_spawned.emit(resource_instance)
 	queue_free()
+
+func _on_body_entered(body: Node2D):
+	if body is Asteroid2D or body is Bullet2D: return
+	if body.has_method("damage"):
+		body.damage(pow(2, game_mass))
+	damage(1)
 
 func _ready():
 	var _scale_ratio = pow(2, game_mass) / 16.0

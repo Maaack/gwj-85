@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://blmqu1s4cnie5"]
+[gd_scene load_steps=7 format=4 uid="uid://blmqu1s4cnie5"]
 
 [ext_resource type="Script" uid="uid://c24inooqjqpcu" path="res://scenes/stations/station.gd" id="1_p2oen"]
 [ext_resource type="Texture2D" uid="uid://dhbyaxm3n57rj" path="res://assets/sprites/white-station-piskel-v2.png" id="2_p2oen"]
+[ext_resource type="Script" uid="uid://1fre8nchd36n" path="res://scenes/stations/station_parts.gd" id="3_3ic5c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ic5c"]
 texture = ExtResource("2_p2oen")
@@ -99,7 +100,7 @@ texture = ExtResource("2_p2oen")
 2:3/0/terrains_peering_bit/top_side = 0
 
 [sub_resource type="TileSet" id="TileSet_fbgwf"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 2
 terrain_set_0/terrain_0/name = "StationParts"
@@ -117,6 +118,7 @@ texture_filter = 1
 position = Vector2(-8, -8)
 tile_map_data = PackedByteArray("AAAAAAAAAQACAAMAAAAAAAEAAQAAAAAAAAAAAAIAAQABAAEAAAABAAIAAQADAAEAAAAAAP//AQAAAAAAAAAAAP7/AQAAAAIAAAABAAAAAQABAAAAAAD//wAAAQABAAAAAAD+/wAAAQABAAIAAAACAAAAAQADAAEAAAA=")
 tile_set = SubResource("TileSet_fbgwf")
+script = ExtResource("3_3ic5c")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0

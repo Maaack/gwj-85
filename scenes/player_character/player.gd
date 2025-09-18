@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal resources_updated(count : int)
+
 @export var resources : int = 0
 
 @onready var health_component = %HealthComponent
@@ -7,10 +9,12 @@ extends CharacterBody2D
 func remove_all_resources() -> int:
 	var return_value := resources
 	resources = 0
+	resources_updated.emit(resources)
 	return return_value
 
 func add_resource(amount : int = 1) -> bool:
 	resources += amount
+	resources_updated.emit(resources)
 	return true
 
 func damage(amount : float) -> void:
