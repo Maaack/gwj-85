@@ -17,14 +17,14 @@ texture = ExtResource("1_3lgnh")
 
 [node name="PlayerController" type="Node" parent="."]
 script = ExtResource("2_3lgnh")
-move_speed = 20.0
+move_speed = 50.0
 always_moving = true
 
 [node name="FireController" type="Node" parent="."]
 script = ExtResource("3_y1h0s")
 bullet_scene = ExtResource("4_ev6t3")
-spawn_offset = Vector2(5, 0)
-spawn_speed = 50.0
+spawn_offset = Vector2(15, 0)
+spawn_speed = 100.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 rotation = 1.5708
