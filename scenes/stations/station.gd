@@ -1,8 +1,9 @@
+class_name SpaceStation2D
 extends Node2D
 
 signal resources_changed(delta, reason)
 signal state_changed(resources, damage)
-signal destroyed(reason)
+signal destroyed
 
 const NO_TILE = -1
 const CARDINAL_DIRECTIONS : Array = [
@@ -188,3 +189,5 @@ func _on_station_parts_tile_damaged(tile_id, _amount):
 	_map_parts_connected_to_center()
 	for part in disconnected_parts:
 		station_parts.set_cell(part)
+	if connected_parts.is_empty():
+		destroyed.emit()
