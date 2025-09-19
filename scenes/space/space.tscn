@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dihrvlelgw1hq"]
+[gd_scene load_steps=9 format=3 uid="uid://dihrvlelgw1hq"]
 
 [ext_resource type="Script" uid="uid://06q0y3pvo6ae" path="res://scenes/space/space.gd" id="1_718x5"]
 [ext_resource type="PackedScene" uid="uid://k4l4k4ev6t7x" path="res://scenes/player_character/player.tscn" id="2_x217o"]
 [ext_resource type="PackedScene" uid="uid://blmqu1s4cnie5" path="res://scenes/stations/station.tscn" id="3_x217o"]
 [ext_resource type="Texture2D" uid="uid://dhbyaxm3n57rj" path="res://assets/sprites/white-station-piskel-v2.png" id="4_0a2q3"]
 [ext_resource type="PackedScene" uid="uid://b0bfytfwc4v4t" path="res://scenes/asteroids/asteroid.tscn" id="5_0a2q3"]
+[ext_resource type="PackedScene" uid="uid://d5pko5l0mapi" path="res://scenes/space/asteroid_spawner.tscn" id="6_n6hgd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6hgd"]
 texture = ExtResource("4_0a2q3")
@@ -125,11 +126,6 @@ resources = 20
 [node name="StationParts" parent="Station2" index="0"]
 tile_set = SubResource("TileSet_wfdyj")
 
-[node name="Asteroid" parent="." instance=ExtResource("5_0a2q3")]
-position = Vector2(155, 0)
-collision_layer = 5
-collision_mask = 15
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
@@ -145,6 +141,10 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="AsteroidSpawner" parent="." instance=ExtResource("6_n6hgd")]
+position = Vector2(228, -31)
+spawn_scene = ExtResource("5_0a2q3")
 
 [connection signal="resources_updated" from="Player" to="." method="_on_player_resources_updated"]
 

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://l0fvn0dl80xb" path="res://scenes/objects/resource.tscn" id="2_xn8ob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nxpf8"]
+resource_local_to_scene = true
 radius = 22.0
 
 [node name="Asteroid" type="RigidBody2D"]
