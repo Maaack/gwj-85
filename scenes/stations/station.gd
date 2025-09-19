@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Node2D
 
 signal resources_changed(delta, reason)
 signal state_changed(resources, damage)
@@ -165,14 +165,16 @@ func _expand_station(expand_max : int = 0) -> int:
 	return expanded
 
 func _on_timer_timeout():
-	_expand_station()
+	_expand_station(2)
 
 func _ready():
 	create_pathfinding_points()
 	_map_parts_connected_to_center()
 
-
 func _on_friendly_area_2d_body_entered(body):
 	if body.has_method("remove_all_resources"):
 		resources += body.remove_all_resources()
-		_expand_station(4)
+
+func _on_station_parts_tile_damaged(tile_id, amount):
+	station_parts.set_cell(tile_id)
+	astar.remove_point(get_point(tile_id))

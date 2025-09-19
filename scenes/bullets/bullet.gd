@@ -3,14 +3,15 @@ extends CharacterBody2D
 
 @export var bullet_damage := 10
 
-func _physics_process(_delta) -> void:
+func _physics_process(delta) -> void:
+	var _velocity = velocity
 	if move_and_slide():
 		for i in get_slide_collision_count():
 			var collision := get_slide_collision(i)
 			var collider := collision.get_collider()
 			if collider.has_method(&"damage"):
 				if collider is TileMapLayer:
-					collider.damage(bullet_damage, collision.get_position())
+					collider.damage(bullet_damage, collision.get_position() + _velocity * delta)
 				else:
 					collider.damage(bullet_damage)
 		queue_free()

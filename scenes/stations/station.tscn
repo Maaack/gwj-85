@@ -109,20 +109,19 @@ sources/1 = SubResource("TileSetAtlasSource_3ic5c")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p2oen"]
 
-[node name="Station" type="StaticBody2D"]
+[node name="Station" type="Node2D"]
 script = ExtResource("1_p2oen")
 
 [node name="StationParts" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(-8, -8)
-tile_map_data = PackedByteArray("AAAAAAAAAQACAAMAAAAAAAEAAQAAAAAAAAAAAAIAAQABAAEAAAABAAIAAQADAAEAAAAAAP//AQAAAAAAAAAAAP7/AQAAAAIAAAABAAAAAQABAAAAAAD//wAAAQABAAAAAAD+/wAAAQABAAIAAAACAAAAAQADAAEAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAABAAAAAQADAAIAAAD//wAAAQABAAMAAAABAP//AQAAAAIAAAABAAEAAQACAAEAAAD/////AQAAAAIAAAD//wEAAQACAAEAAAA=")
 tile_set = SubResource("TileSet_fbgwf")
 script = ExtResource("3_3ic5c")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
+wait_time = 2.5
 autostart = true
 
 [node name="FriendlyArea2D" type="Area2D" parent="."]
@@ -132,5 +131,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FriendlyArea2D"]
 shape = SubResource("CircleShape2D_p2oen")
 
+[connection signal="tile_damaged" from="StationParts" to="." method="_on_station_parts_tile_damaged"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="FriendlyArea2D" to="." method="_on_friendly_area_2d_body_entered"]
