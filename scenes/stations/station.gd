@@ -22,9 +22,10 @@ const CANTOR_LIMIT = int(pow(2, 30))
 @onready var cell_size := station_parts.tile_set.tile_size
 
 var connected_parts : Array
+var disconnected_parts : Array
 var part_distance_map : Dictionary
 var furthest_part_distance : int
-var point_id_position_map : Dictionary[int, Vector2]
+var point_id_position_map : Dictionary[int, Vector2i]
 
 func get_used_cell_global_positions() -> Array:
 	var cells = station_parts.get_used_cells()
@@ -35,20 +36,19 @@ func get_used_cell_global_positions() -> Array:
 	return cell_positions
 
 func connect_cardinals(point_position : Vector2i) -> void:
-	var center := get_point(point_position)
+	var center := get_point(point_position, false)
 	for direction in CARDINAL_DIRECTIONS:
-		var cardinal_point := get_point(point_position + (direction * cell_size))
+		var cardinal_point := get_point(point_position + direction, false)
 		if cardinal_point != center and astar.has_point(cardinal_point):
 			astar.connect_points(center, cardinal_point, true)
 
 func create_pathfinding_points() -> void:
 	astar.clear()
-	var used_cell_positions = get_used_cell_global_positions()
-	for cell_position in used_cell_positions:
-		cell_position -= Vector2(cell_size)/2.0
-		astar.add_point(get_point(cell_position), cell_position)
-		point_id_position_map[get_point(cell_position)] = cell_position
-	for cell_position in used_cell_positions:
+	point_id_position_map.clear()
+	for cell_position in station_parts.get_used_cells():
+		astar.add_point(get_point(cell_position, false), cell_position)
+		point_id_position_map[get_point(cell_position, false)] = cell_position
+	for cell_position in point_id_position_map.values():
 		connect_cardinals(cell_position)
 
 func set_path_length(point_path: Array, max_distance: int) -> Array:
@@ -61,17 +61,20 @@ func to_natural(num: int) -> int:
 		return CANTOR_LIMIT + num
 	return num
 
-func get_point(point_position: Vector2) -> int:
+func get_point(point_position: Vector2, in_local_space : bool = true) -> int:
+	var cell_position : Vector2i = Vector2i(point_position)
+	if in_local_space:
+		cell_position = round(point_position / Vector2(cell_size))
 	# Cantor pairing function
-	var a := to_natural(point_position.x)
-	var b := to_natural(point_position.y)
+	var a := to_natural(cell_position.x)
+	var b := to_natural(cell_position.y)
 	return (a + b) * (a + b + 1) / 2 + b
 
-func has_point(point_position: Vector2) -> bool:
-	var point_id := get_point(point_position)
+func has_point(point_position: Vector2, in_local_space : bool = true) -> bool:
+	var point_id := get_point(point_position, in_local_space)
 	return astar.has_point(point_id)
 
-func get_astar_path_avoiding_obstacles(start_position: Vector2, end_position: Vector2, max_distance := -1) -> Array:
+func get_astar_path(start_position: Vector2, end_position: Vector2, max_distance := -1) -> Array:
 	if not has_point(start_position) or not has_point(end_position):
 		print("start_point: %v, %s ; end_point: %v, %s" % [start_position, has_point(start_position), end_position, has_point(end_position)])
 		return []
@@ -80,15 +83,18 @@ func get_astar_path_avoiding_obstacles(start_position: Vector2, end_position: Ve
 
 func _map_parts_connected_to_center():
 	connected_parts.clear()
+	disconnected_parts.clear()
 	part_distance_map.clear()
 	furthest_part_distance = 0
 	var target_cell := Vector2.ZERO
 	var start_cell : Vector2
 	for cellv in station_parts.get_used_cells():
 		start_cell = cellv * cell_size
-		var distance = get_astar_path_avoiding_obstacles(start_cell, target_cell).size()
-		if distance > 0:
+		var distance = get_astar_path(start_cell, target_cell).size()
+		if start_cell == target_cell or distance > 0:
 			connected_parts.append(cellv)
+		else:
+			disconnected_parts.append(cellv)
 		if distance > furthest_part_distance:
 			furthest_part_distance = distance
 		if not distance in part_distance_map:
@@ -144,6 +150,7 @@ func _expand_station_with_part(cellv : Vector2i):
 	if not _is_cell_buildable(cellv):
 		return
 	station_parts.set_cells_terrain_connect([cellv], 0, 0)
+	create_pathfinding_points()
 
 func _expand_station(expand_max : int = 0) -> int:
 	var extra_resources := resources
@@ -175,6 +182,9 @@ func _on_friendly_area_2d_body_entered(body):
 	if body.has_method("remove_all_resources"):
 		resources += body.remove_all_resources()
 
-func _on_station_parts_tile_damaged(tile_id, amount):
+func _on_station_parts_tile_damaged(tile_id, _amount):
 	station_parts.set_cell(tile_id)
-	astar.remove_point(get_point(tile_id))
+	create_pathfinding_points()
+	_map_parts_connected_to_center()
+	for part in disconnected_parts:
+		station_parts.set_cell(part)
