@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://k4l4k4ev6t7x"]
+[gd_scene load_steps=8 format=3 uid="uid://k4l4k4ev6t7x"]
 
 [ext_resource type="Script" uid="uid://de2is8p30174w" path="res://scenes/player_character/player.gd" id="1_0sa2d"]
 [ext_resource type="Texture2D" uid="uid://cebi0is4lsup4" path="res://assets/sprites/ship_A.png" id="1_3lgnh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bn2dqhc21gex6" path="res://scenes/player_character/fire_controller.gd" id="3_y1h0s"]
 [ext_resource type="PackedScene" uid="uid://dy4jpp8ac8ixh" path="res://scenes/bullets/bullet.tscn" id="4_ev6t3"]
 [ext_resource type="Script" uid="uid://c8lbeuefufhh2" path="res://scenes/components/health_component.gd" id="6_0sa2d"]
+[ext_resource type="Script" uid="uid://b4p8gwxddkx75" path="res://scenes/components/unit_storage_component.gd" id="7_hb7qo"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 28
@@ -39,3 +40,12 @@ unique_name_in_owner = true
 script = ExtResource("6_0sa2d")
 starting_health = 10.0
 max_health = 10.0
+
+[node name="ResourceStorageComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_hb7qo")
+max_amount = 5.0
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="max_health_changed" from="HealthComponent" to="." method="_on_health_component_max_health_changed"]
