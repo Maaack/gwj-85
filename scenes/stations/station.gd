@@ -5,6 +5,7 @@ signal resources_changed(delta, reason)
 signal state_changed(resources, damage)
 signal destroyed
 
+const ENEMY_COLLISION_LAYER = 8
 const NO_TILE = -1
 const CARDINAL_DIRECTIONS : Array = [
 		Vector2i.UP,
@@ -20,9 +21,12 @@ enum PartType {
 	TIP
 }
 
+@export var enemy : bool = false
 @export var resources : int = 0
 @export var health : int = 10
 @export var size_limit : int = 8
+@export var fire_delay : float = 0.25
+@export var cooldown_delay : float = 1.0
 
 @onready var astar = AStar2D.new()
 @onready var station_parts : TileMapLayer = %StationParts
@@ -35,6 +39,8 @@ var furthest_part_distance : int
 var point_id_position_map : Dictionary[int, Vector2i]
 var tile_health_map : Dictionary[Vector2i, int]
 var tile_type_map : Dictionary[Vector2i, PartType]
+var shooting_positions : Array[Vector2i]
+var shooting_cooldown_map : Dictionary[Vector2i, float]
 
 func get_used_cell_global_positions() -> Array:
 	var cells = station_parts.get_used_cells()
@@ -59,6 +65,7 @@ func create_pathfinding_points() -> void:
 		point_id_position_map[get_point(cell_position, false)] = cell_position
 	for cell_position in point_id_position_map.values():
 		connect_cardinals(cell_position)
+	_map_tiles()
 
 func set_path_length(point_path: Array, max_distance: int) -> Array:
 	if max_distance < 0: return point_path
@@ -99,11 +106,12 @@ func get_cell_part_type(cellv: Vector2i) -> PartType:
 	else:
 		return PartType.JUNCTION
 
-func _map_parts_connected_to_center():
+func _map_tiles():
 	connected_parts.clear()
 	disconnected_parts.clear()
 	part_distance_map.clear()
 	tile_type_map.clear()
+	shooting_positions.clear()
 	furthest_part_distance = 0
 	var target_cell := Vector2.ZERO
 	var start_cell : Vector2
@@ -120,6 +128,8 @@ func _map_parts_connected_to_center():
 			part_distance_map[distance] = []
 		part_distance_map[distance].append(cellv)
 		tile_type_map[cellv] = get_cell_part_type(cellv)
+		if tile_type_map[cellv] == PartType.TIP:
+			shooting_positions.append(cellv)
 
 func _is_in_bounds(cellv : Vector2) -> bool:
 	return abs(cellv.x) < size_limit and abs(cellv.y) < size_limit
@@ -171,7 +181,6 @@ func _expand_station_with_part(cellv : Vector2i):
 		return
 	station_parts.set_cells_terrain_connect([cellv], 0, 0)
 	create_pathfinding_points()
-	_map_parts_connected_to_center()
 
 func expand_station(expand_max : int = 0) -> int:
 	var extra_resources := resources
@@ -197,7 +206,10 @@ func _on_timer_timeout():
 
 func _ready():
 	create_pathfinding_points()
-	_map_parts_connected_to_center()
+	if enemy:
+		var new_tile_set = station_parts.tile_set.duplicate()
+		new_tile_set.set_physics_layer_collision_layer(0, ENEMY_COLLISION_LAYER)
+		station_parts.tile_set = new_tile_set
 
 func _on_friendly_area_2d_body_entered(body):
 	if body.has_method("remove_all_resources"):
@@ -208,8 +220,24 @@ func _on_station_parts_tile_damaged(tile_id, _amount):
 	if part_type == PartType.ARM : return
 	station_parts.set_cell(tile_id)
 	create_pathfinding_points()
-	_map_parts_connected_to_center()
 	for part in disconnected_parts:
 		station_parts.set_cell(part)
 	if connected_parts.is_empty():
 		destroyed.emit()
+
+func _get_shooting_positions_closest_to_player(max_range : float = 200) -> Array[Vector2i]:
+	var in_range_positions : Array[Vector2i]
+	var range_position_map : Dictionary[Vector2i, float]
+	for shooting_position in shooting_positions:
+		var world_position := global_position + Vector2(shooting_position * cell_size)
+		var player := get_tree().get_first_node_in_group(&"player")
+		var distance := world_position.distance_to(player.global_position)
+		if distance < max_range:
+			in_range_positions.append(shooting_position)
+	return in_range_positions
+
+func _process(delta):
+	if not enemy:
+		var positions := _get_shooting_positions_closest_to_player()
+		positions = positions.slice(0, 6)
+		

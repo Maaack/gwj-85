@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://c8lbeuefufhh2" path="res://scenes/components/health_component.gd" id="6_0sa2d"]
 [ext_resource type="Script" uid="uid://b4p8gwxddkx75" path="res://scenes/components/unit_storage_component.gd" id="7_hb7qo"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 28
 script = ExtResource("1_0sa2d")
 

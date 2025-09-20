@@ -28,6 +28,7 @@ func _ready() -> void:
 				player_station = child
 				child.destroyed.connect(func() : GameEvents.player_station_destroyed.emit())
 				continue
+			child.enemy = true
 			enemy_stations.append(child)
 			child.destroyed.connect(_on_enemy_station_destroyed)
 
