@@ -25,8 +25,11 @@ enum PartType {
 @export var resources : int = 0
 @export var health : int = 10
 @export var size_limit : int = 8
-@export var fire_delay : float = 0.25
-@export var cooldown_delay : float = 1.0
+@export var fire_delay : float = 0.4
+@export var part_fire_delay : float = 1.0
+@export var enemy_projectile_velocity : float = 80.0
+@export var enemy_projectile_scene : PackedScene
+
 
 @onready var astar = AStar2D.new()
 @onready var station_parts : TileMapLayer = %StationParts
@@ -41,6 +44,7 @@ var tile_health_map : Dictionary[Vector2i, int]
 var tile_type_map : Dictionary[Vector2i, PartType]
 var shooting_positions : Array[Vector2i]
 var shooting_cooldown_map : Dictionary[Vector2i, float]
+var shooting_cooldown : float = 0.0
 
 func get_used_cell_global_positions() -> Array:
 	var cells = station_parts.get_used_cells()
@@ -128,7 +132,7 @@ func _map_tiles():
 			part_distance_map[distance] = []
 		part_distance_map[distance].append(cellv)
 		tile_type_map[cellv] = get_cell_part_type(cellv)
-		if tile_type_map[cellv] == PartType.TIP:
+		if tile_type_map[cellv] in [PartType.TIP, PartType.CENTER]:
 			shooting_positions.append(cellv)
 
 func _is_in_bounds(cellv : Vector2) -> bool:
@@ -225,19 +229,33 @@ func _on_station_parts_tile_damaged(tile_id, _amount):
 	if connected_parts.is_empty():
 		destroyed.emit()
 
-func _get_shooting_positions_closest_to_player(max_range : float = 200) -> Array[Vector2i]:
+func _get_player_vector(tile_id : Vector2i) -> Vector2:
+	var world_position := global_position + Vector2(tile_id * cell_size) 
+	var player := get_tree().get_first_node_in_group(&"player")
+	return player.global_position - world_position
+
+func _get_shooting_positions_in_range_of_player(max_range : float = 100) -> Array[Vector2i]:
 	var in_range_positions : Array[Vector2i]
-	var range_position_map : Dictionary[Vector2i, float]
 	for shooting_position in shooting_positions:
-		var world_position := global_position + Vector2(shooting_position * cell_size)
-		var player := get_tree().get_first_node_in_group(&"player")
-		var distance := world_position.distance_to(player.global_position)
+		var distance := _get_player_vector(shooting_position).length()
 		if distance < max_range:
 			in_range_positions.append(shooting_position)
 	return in_range_positions
 
 func _process(delta):
-	if not enemy:
-		var positions := _get_shooting_positions_closest_to_player()
-		positions = positions.slice(0, 6)
-		
+	shooting_cooldown -= delta
+	for shooting_position in shooting_cooldown_map:
+		shooting_cooldown_map[shooting_position] -= delta
+	if shooting_cooldown > 0: return
+	if enemy:
+		var in_range_positions := _get_shooting_positions_in_range_of_player()
+		for shooting_position in in_range_positions:
+			if shooting_position in shooting_cooldown_map and shooting_cooldown_map[shooting_position] > 0.0:
+				continue
+			shooting_cooldown_map[shooting_position] = part_fire_delay
+			shooting_cooldown = fire_delay
+			var bullet_instance : CharacterBody2D = enemy_projectile_scene.instantiate()
+			bullet_instance.global_position = global_position + Vector2(shooting_position * cell_size)
+			bullet_instance.velocity = _get_player_vector(shooting_position).normalized() * enemy_projectile_velocity
+			GameEvents.object_spawned.emit(bullet_instance)
+			break

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://op0jpekss5tj"]
+
+[ext_resource type="PackedScene" uid="uid://dy4jpp8ac8ixh" path="res://scenes/bullets/bullet.tscn" id="1_ssc7s"]
+
+[node name="Bullet" instance=ExtResource("1_ssc7s")]
+collision_mask = 19
+bullet_damage = 2
+
+[node name="DecayTimer" parent="." index="2"]
+wait_time = 2.5
