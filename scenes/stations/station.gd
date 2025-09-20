@@ -20,7 +20,7 @@ enum PartType {
 	TIP
 }
 
-@export var resources : int = 6
+@export var resources : int = 0
 @export var health : int = 10
 @export var size_limit : int = 8
 

@@ -120,7 +120,6 @@ collision_mask = 12
 
 [node name="Station2" parent="." instance=ExtResource("3_x217o")]
 position = Vector2(556, -1)
-resources = 20
 
 [node name="StationParts" parent="Station2" index="0"]
 tile_set = SubResource("TileSet_wfdyj")
@@ -168,7 +167,12 @@ show_percentage = false
 position = Vector2(284, 0)
 spawn_scene = ExtResource("5_0a2q3")
 
+[node name="GiveEnemiesResourceTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [connection signal="heatlh_changed" from="Player" to="." method="_on_player_heatlh_changed"]
 [connection signal="resources_updated" from="Player" to="." method="_on_player_resources_updated"]
+[connection signal="timeout" from="GiveEnemiesResourceTimer" to="." method="_on_give_enemies_resource_timer_timeout"]
 
 [editable path="Station2"]
