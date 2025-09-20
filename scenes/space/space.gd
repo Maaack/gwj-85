@@ -21,6 +21,8 @@ func _ready() -> void:
 	GameEvents.object_spawned.connect(_on_object_spawned)
 	for child in get_children():
 		if child is SpaceStation2D:
+			child.resources += 50
+			child.expand_station(50)
 			if player_station == null:
 				player_station = child
 				child.destroyed.connect(func() : GameEvents.player_station_destroyed.emit())

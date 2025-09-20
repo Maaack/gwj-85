@@ -117,10 +117,9 @@ script = ExtResource("1_718x5")
 collision_mask = 12
 
 [node name="Station" parent="." instance=ExtResource("3_x217o")]
-position = Vector2(155, 85)
 
 [node name="Station2" parent="." instance=ExtResource("3_x217o")]
-position = Vector2(372, 0)
+position = Vector2(556, -1)
 resources = 20
 
 [node name="StationParts" parent="Station2" index="0"]
@@ -135,6 +134,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -164,7 +165,7 @@ value = 1.0
 show_percentage = false
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("6_n6hgd")]
-position = Vector2(228, -31)
+position = Vector2(284, 0)
 spawn_scene = ExtResource("5_0a2q3")
 
 [connection signal="heatlh_changed" from="Player" to="." method="_on_player_heatlh_changed"]

@@ -13,6 +13,12 @@ const CARDINAL_DIRECTIONS : Array = [
 		Vector2i.RIGHT
 	]
 const CANTOR_LIMIT = int(pow(2, 30))
+enum PartType {
+	CENTER,
+	ARM,
+	JUNCTION,
+	TIP
+}
 
 @export var resources : int = 6
 @export var health : int = 10
@@ -27,6 +33,8 @@ var disconnected_parts : Array
 var part_distance_map : Dictionary
 var furthest_part_distance : int
 var point_id_position_map : Dictionary[int, Vector2i]
+var tile_health_map : Dictionary[Vector2i, int]
+var tile_type_map : Dictionary[Vector2i, PartType]
 
 func get_used_cell_global_positions() -> Array:
 	var cells = station_parts.get_used_cells()
@@ -77,15 +85,25 @@ func has_point(point_position: Vector2, in_local_space : bool = true) -> bool:
 
 func get_astar_path(start_position: Vector2, end_position: Vector2, max_distance := -1) -> Array:
 	if not has_point(start_position) or not has_point(end_position):
-		print("start_point: %v, %s ; end_point: %v, %s" % [start_position, has_point(start_position), end_position, has_point(end_position)])
 		return []
 	var astar_path := astar.get_point_path(get_point(start_position), get_point(end_position))
 	return set_path_length(astar_path, max_distance)
+
+func get_cell_part_type(cellv: Vector2i) -> PartType:
+	if cellv == Vector2i.ZERO : return PartType.CENTER
+	var cell_atlas_coords := station_parts.get_cell_atlas_coords(cellv)
+	if cell_atlas_coords.y == 0 or (cell_atlas_coords.x <= 1 and cell_atlas_coords.y <= 1):
+		return PartType.ARM
+	elif cell_atlas_coords in [Vector2i(2,1), Vector2i(3,1), Vector2i(0,2), Vector2i(1,2)]:
+		return PartType.TIP
+	else:
+		return PartType.JUNCTION
 
 func _map_parts_connected_to_center():
 	connected_parts.clear()
 	disconnected_parts.clear()
 	part_distance_map.clear()
+	tile_type_map.clear()
 	furthest_part_distance = 0
 	var target_cell := Vector2.ZERO
 	var start_cell : Vector2
@@ -101,6 +119,7 @@ func _map_parts_connected_to_center():
 		if not distance in part_distance_map:
 			part_distance_map[distance] = []
 		part_distance_map[distance].append(cellv)
+		tile_type_map[cellv] = get_cell_part_type(cellv)
 
 func _is_in_bounds(cellv : Vector2) -> bool:
 	return abs(cellv.x) < size_limit and abs(cellv.y) < size_limit
@@ -152,8 +171,9 @@ func _expand_station_with_part(cellv : Vector2i):
 		return
 	station_parts.set_cells_terrain_connect([cellv], 0, 0)
 	create_pathfinding_points()
+	_map_parts_connected_to_center()
 
-func _expand_station(expand_max : int = 0) -> int:
+func expand_station(expand_max : int = 0) -> int:
 	var extra_resources := resources
 	if expand_max == 0:
 		expand_max = extra_resources
@@ -173,7 +193,7 @@ func _expand_station(expand_max : int = 0) -> int:
 	return expanded
 
 func _on_timer_timeout():
-	_expand_station(2)
+	expand_station(2)
 
 func _ready():
 	create_pathfinding_points()
@@ -184,6 +204,8 @@ func _on_friendly_area_2d_body_entered(body):
 		resources += body.remove_all_resources()
 
 func _on_station_parts_tile_damaged(tile_id, _amount):
+	var part_type := tile_type_map[tile_id]
+	if part_type == PartType.ARM : return
 	station_parts.set_cell(tile_id)
 	create_pathfinding_points()
 	_map_parts_connected_to_center()

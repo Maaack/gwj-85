@@ -35,7 +35,10 @@ func _on_body_entered(body: Node2D):
 	if destroyed: return
 	if body is Asteroid2D or body is Bullet2D: return
 	if body.has_method("damage"):
-		body.damage(pow(2, game_mass))
+		if body is TileMapLayer:
+			body.damage(pow(2, game_mass), global_position)
+		else:
+			body.damage(pow(2, game_mass))
 	damage(1)
 
 func _ready():
