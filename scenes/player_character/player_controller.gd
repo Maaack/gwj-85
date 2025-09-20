@@ -10,6 +10,7 @@ extends Node
 @export var move_left_action : StringName = &"move_left"
 @export var move_right_action : StringName = &"move_right"
 
+@export var collision_damage : float = 5
 @export var collision_lock_delay : float = 0.25
 
 var colliding_vector : Vector2
@@ -52,7 +53,7 @@ func _process(_delta) -> void:
 		character_body.velocity = move_speed * facing_vector
 	if character_body.move_and_slide():
 		if control_locked: return
-		character_body.damage(1)
+		character_body.damage(collision_damage)
 		colliding_vector = facing_vector
 		control_locked = true
 		await get_tree().create_timer(collision_lock_delay).timeout
