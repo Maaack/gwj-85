@@ -136,6 +136,7 @@ func _map_tiles():
 			shooting_positions.append(cellv)
 
 func _is_in_bounds(cellv : Vector2) -> bool:
+	if size_limit == 0: return true
 	return abs(cellv.x) < size_limit and abs(cellv.y) < size_limit
 
 func _is_cell_buildable(cellv : Vector2) -> bool:

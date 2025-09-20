@@ -24,6 +24,7 @@ func _ready() -> void:
 		if child is SpaceStation2D:
 			child.resources += station_starting_size
 			child.expand_station(station_starting_size)
+			child.size_limit = 0
 			if player_station == null:
 				player_station = child
 				child.destroyed.connect(func() : GameEvents.player_station_destroyed.emit())

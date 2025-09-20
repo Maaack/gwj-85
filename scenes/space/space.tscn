@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dihrvlelgw1hq"]
+[gd_scene load_steps=7 format=3 uid="uid://dihrvlelgw1hq"]
 
 [ext_resource type="Script" uid="uid://06q0y3pvo6ae" path="res://scenes/space/space.gd" id="1_718x5"]
 [ext_resource type="PackedScene" uid="uid://k4l4k4ev6t7x" path="res://scenes/player_character/player.tscn" id="2_x217o"]
 [ext_resource type="PackedScene" uid="uid://blmqu1s4cnie5" path="res://scenes/stations/station.tscn" id="3_x217o"]
 [ext_resource type="PackedScene" uid="uid://b0bfytfwc4v4t" path="res://scenes/asteroids/asteroid.tscn" id="5_0a2q3"]
 [ext_resource type="PackedScene" uid="uid://d5pko5l0mapi" path="res://scenes/space/asteroid_spawner.tscn" id="6_n6hgd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0a2q3"]
+size = Vector2(2000, 20)
 
 [node name="Space" type="Node"]
 script = ExtResource("1_718x5")
@@ -68,6 +71,28 @@ autostart = true
 
 [node name="Player" parent="." instance=ExtResource("2_x217o")]
 collision_mask = 12
+
+[node name="Barriers2D" type="StaticBody2D" parent="."]
+collision_layer = 17
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barriers2D"]
+position = Vector2(0, -600)
+shape = SubResource("RectangleShape2D_0a2q3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Barriers2D"]
+position = Vector2(0, 600)
+shape = SubResource("RectangleShape2D_0a2q3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Barriers2D"]
+position = Vector2(-500, 0)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_0a2q3")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Barriers2D"]
+position = Vector2(1000, 0)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_0a2q3")
 
 [connection signal="timeout" from="GiveEnemiesResourceTimer" to="." method="_on_give_enemies_resource_timer_timeout"]
 [connection signal="heatlh_changed" from="Player" to="." method="_on_player_heatlh_changed"]
