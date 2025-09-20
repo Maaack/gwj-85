@@ -9,9 +9,6 @@
 [node name="Space" type="Node"]
 script = ExtResource("1_718x5")
 
-[node name="Player" parent="." instance=ExtResource("2_x217o")]
-collision_mask = 12
-
 [node name="Station" parent="." instance=ExtResource("3_x217o")]
 
 [node name="Station3" parent="." instance=ExtResource("3_x217o")]
@@ -69,6 +66,9 @@ spawn_scene = ExtResource("5_0a2q3")
 wait_time = 5.0
 autostart = true
 
+[node name="Player" parent="." instance=ExtResource("2_x217o")]
+collision_mask = 12
+
+[connection signal="timeout" from="GiveEnemiesResourceTimer" to="." method="_on_give_enemies_resource_timer_timeout"]
 [connection signal="heatlh_changed" from="Player" to="." method="_on_player_heatlh_changed"]
 [connection signal="resources_updated" from="Player" to="." method="_on_player_resources_updated"]
-[connection signal="timeout" from="GiveEnemiesResourceTimer" to="." method="_on_give_enemies_resource_timer_timeout"]

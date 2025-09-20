@@ -1,6 +1,8 @@
+class_name PlayerController
 extends Node
 
 @export_node_path("CharacterBody2D") var character_body_node_path : NodePath = ^".."
+@export var animation_player : AnimationPlayer
 @export var move_speed : float = 10.0
 @export var always_moving : bool = false
 @export var move_up_action : StringName = &"move_up"
@@ -16,6 +18,26 @@ var control_locked : bool = false
 
 @onready var character_body : CharacterBody2D = get_node(character_body_node_path)
 
+func get_direction(from_vector : Vector2) -> StringName:
+	var direction : StringName = &"N"
+	if from_vector.x > 0:
+		direction = &"E"
+		if from_vector.y > 0:
+			direction = &"SE"
+		elif from_vector.y < 0:
+			direction = &"NE"
+	elif from_vector.x < 0:
+		direction = &"W"
+		if from_vector.y > 0:
+			direction = &"SW"
+		elif from_vector.y < 0:
+			direction = &"NW"
+	else:
+		if from_vector.y > 0:
+			direction = &"S"
+	return direction
+		
+
 func _process(_delta) -> void:
 	var new_facing_vector : Vector2
 	if not control_locked:
@@ -24,7 +46,8 @@ func _process(_delta) -> void:
 		new_facing_vector = -colliding_vector
 	if not new_facing_vector.is_zero_approx():
 		facing_vector = new_facing_vector
-		character_body.look_at(facing_vector + character_body.global_position)
+		if animation_player:
+			animation_player.play(get_direction(facing_vector))
 	if (not new_facing_vector.is_zero_approx()) or always_moving:
 		character_body.velocity = move_speed * facing_vector
 	if character_body.move_and_slide():
