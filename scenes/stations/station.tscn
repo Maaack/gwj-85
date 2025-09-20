@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://blmqu1s4cnie5"]
 
 [ext_resource type="Script" uid="uid://c24inooqjqpcu" path="res://scenes/stations/station.gd" id="1_p2oen"]
-[ext_resource type="PackedScene" uid="uid://op0jpekss5tj" path="res://scenes/bullets/enemy_bullet.tscn" id="2_fbgwf"]
+[ext_resource type="PackedScene" uid="uid://op0jpekss5tj" path="res://scenes/projectiles/enemy_bullet.tscn" id="2_fbgwf"]
 [ext_resource type="Texture2D" uid="uid://dhbyaxm3n57rj" path="res://assets/sprites/white-station-piskel-v2.png" id="2_p2oen"]
 [ext_resource type="Script" uid="uid://1fre8nchd36n" path="res://scenes/stations/station_parts.gd" id="3_3ic5c"]
 

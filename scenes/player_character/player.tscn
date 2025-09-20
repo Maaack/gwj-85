@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cl2lgwr2etn22" path="res://scenes/player_character/player_controller.gd" id="2_3lgnh"]
 [ext_resource type="Texture2D" uid="uid://baltkggr8nfxo" path="res://assets/sprites/white-ship-v1.png" id="2_hb7qo"]
 [ext_resource type="Script" uid="uid://bn2dqhc21gex6" path="res://scenes/player_character/fire_controller.gd" id="3_y1h0s"]
-[ext_resource type="PackedScene" uid="uid://dy4jpp8ac8ixh" path="res://scenes/bullets/bullet.tscn" id="4_ev6t3"]
+[ext_resource type="PackedScene" uid="uid://dy4jpp8ac8ixh" path="res://scenes/projectiles/bullet.tscn" id="4_ev6t3"]
 [ext_resource type="Script" uid="uid://c8lbeuefufhh2" path="res://scenes/components/health_component.gd" id="6_0sa2d"]
 [ext_resource type="Script" uid="uid://b4p8gwxddkx75" path="res://scenes/components/unit_storage_component.gd" id="7_hb7qo"]
 
