@@ -112,9 +112,8 @@ sources/1 = SubResource("TileSetAtlasSource_3ic5c")
 
 [node name="Station" type="Node2D"]
 script = ExtResource("1_p2oen")
-fire_delay = 0.25
-enemy_projectile_velocity = 60.0
-enemy_projectile_scene = ExtResource("2_fbgwf")
+projectile_velocity = 60.0
+projectile_scenes = Array[PackedScene]([ExtResource("2_fbgwf")])
 
 [node name="StationParts" type="TileMapLayer" parent="."]
 unique_name_in_owner = true

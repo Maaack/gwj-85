@@ -22,6 +22,9 @@ func add_resource(amount : int = 1) -> bool:
 func damage(amount : float) -> void:
 	health_component.damage(amount)
 
+func heal(amount : float) -> void:
+	health_component.heal(amount)
+
 func _ready() -> void:
 	for child in get_children():
 		if child is ComponentBase:

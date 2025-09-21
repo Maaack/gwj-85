@@ -27,8 +27,8 @@ enum PartType {
 @export var size_limit : int = 8
 @export var fire_delay : float = 0.4
 @export var part_fire_delay : float = 1.0
-@export var enemy_projectile_velocity : float = 80.0
-@export var enemy_projectile_scene : PackedScene
+@export var projectile_velocity : float = 80.0
+@export var projectile_scenes : Array[PackedScene]
 
 
 @onready var astar = AStar2D.new()
@@ -248,15 +248,15 @@ func _process(delta):
 	for shooting_position in shooting_cooldown_map:
 		shooting_cooldown_map[shooting_position] -= delta
 	if shooting_cooldown > 0: return
-	if enemy:
-		var in_range_positions := _get_shooting_positions_in_range_of_player()
-		for shooting_position in in_range_positions:
-			if shooting_position in shooting_cooldown_map and shooting_cooldown_map[shooting_position] > 0.0:
-				continue
-			shooting_cooldown_map[shooting_position] = part_fire_delay
-			shooting_cooldown = fire_delay
-			var bullet_instance : CharacterBody2D = enemy_projectile_scene.instantiate()
-			bullet_instance.global_position = global_position + Vector2(shooting_position * cell_size)
-			bullet_instance.velocity = _get_player_vector(shooting_position).normalized() * enemy_projectile_velocity
-			GameEvents.object_spawned.emit(bullet_instance)
-			break
+	var in_range_positions := _get_shooting_positions_in_range_of_player()
+	for shooting_position in in_range_positions:
+		if shooting_position in shooting_cooldown_map and shooting_cooldown_map[shooting_position] > 0.0:
+			continue
+		shooting_cooldown_map[shooting_position] = part_fire_delay
+		shooting_cooldown = fire_delay
+		var projectile_scene = projectile_scenes.pick_random()
+		var bullet_instance : CharacterBody2D = projectile_scene.instantiate()
+		bullet_instance.global_position = global_position + Vector2(shooting_position * cell_size)
+		bullet_instance.velocity = _get_player_vector(shooting_position).normalized() * projectile_velocity
+		GameEvents.object_spawned.emit(bullet_instance)
+		break

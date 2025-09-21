@@ -1,19 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dy4jpp8ac8ixh"]
+[gd_scene load_steps=4 format=3 uid="uid://dmokh4lufqxx6"]
 
-[ext_resource type="Texture2D" uid="uid://dob036y738vid" path="res://assets/sprites/star_tiny.png" id="1_2flq5"]
-[ext_resource type="Script" uid="uid://b4yeohtp70dj5" path="res://scenes/projectiles/bullet.gd" id="1_5f1na"]
+[ext_resource type="Script" uid="uid://yr0cxttgfal" path="res://scenes/projectiles/armor.gd" id="1_m8aad"]
+[ext_resource type="Texture2D" uid="uid://dob036y738vid" path="res://assets/sprites/star_tiny.png" id="2_wmk01"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5f1na"]
 radius = 2.0
 
-[node name="Bullet" type="CharacterBody2D"]
+[node name="Armor" type="CharacterBody2D"]
+modulate = Color(0.24705882, 1, 0.32156864, 1)
 collision_layer = 0
-collision_mask = 28
-script = ExtResource("1_5f1na")
-bullet_damage = 1
+script = ExtResource("1_m8aad")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_2flq5")
+texture = ExtResource("2_wmk01")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5f1na")

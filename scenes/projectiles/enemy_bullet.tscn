@@ -4,7 +4,6 @@
 
 [node name="Bullet" instance=ExtResource("1_ssc7s")]
 collision_mask = 19
-bullet_damage = 2
 
 [node name="DecayTimer" parent="." index="2"]
 wait_time = 2.5
