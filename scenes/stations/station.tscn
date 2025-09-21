@@ -152,7 +152,8 @@ _data = {
 
 [node name="Station" type="Node2D"]
 script = ExtResource("1_p2oen")
-projectile_velocity = 60.0
+part_fire_delay = 2.0
+projectile_velocity = 50.0
 projectile_scenes = Array[PackedScene]([ExtResource("2_fbgwf")])
 
 [node name="StationParts" type="TileMapLayer" parent="."]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmokh4lufqxx6"]
 
 [ext_resource type="Script" uid="uid://yr0cxttgfal" path="res://scenes/projectiles/armor.gd" id="1_m8aad"]
-[ext_resource type="Texture2D" uid="uid://dob036y738vid" path="res://assets/sprites/star_tiny.png" id="2_wmk01"]
+[ext_resource type="Texture2D" uid="uid://0aoeqxw4ciah" path="res://assets/sprites/white-projectiles.png" id="2_m8aad"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5f1na"]
-radius = 2.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8aad"]
+radius = 5.0
 
 [node name="Armor" type="CharacterBody2D"]
 modulate = Color(0.24705882, 1, 0.32156864, 1)
@@ -12,10 +12,14 @@ collision_layer = 0
 script = ExtResource("1_m8aad")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_wmk01")
+texture_filter = 1
+texture = ExtResource("2_m8aad")
+hframes = 2
+vframes = 3
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_5f1na")
+shape = SubResource("CircleShape2D_m8aad")
 
 [node name="DecayTimer" type="Timer" parent="."]
 wait_time = 3.0

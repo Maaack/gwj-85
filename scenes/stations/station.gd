@@ -286,10 +286,12 @@ func _process(delta):
 		shooting_cooldown_map[shooting_position] -= delta
 	if shooting_cooldown > 0: return
 	var in_range_positions := _get_shooting_positions_in_range_of_player()
+	in_range_positions.shuffle()
 	for shooting_position in in_range_positions:
 		if shooting_position in shooting_cooldown_map and shooting_cooldown_map[shooting_position] > 0.0:
 			continue
-		shooting_cooldown_map[shooting_position] = part_fire_delay
+		if shooting_position != Vector2i.ZERO:
+			shooting_cooldown_map[shooting_position] = part_fire_delay
 		shooting_cooldown = fire_delay
 		var projectile_scene = projectile_scenes.pick_random()
 		var bullet_instance : CharacterBody2D = projectile_scene.instantiate()

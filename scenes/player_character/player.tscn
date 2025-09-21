@@ -312,7 +312,7 @@ max_amount = 8.0
 script = ExtResource("2_3lgnh")
 boost_storage = NodePath("../BoostStorageComponent")
 animation_player = NodePath("../AnimationPlayer")
-move_speed = 40.0
+move_speed = 30.0
 always_moving = true
 
 [node name="FireController" type="Node" parent="." node_paths=PackedStringArray("player_controller", "ammo_storage")]
