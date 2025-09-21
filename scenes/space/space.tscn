@@ -59,61 +59,98 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 2
 
-[node name="Control" type="Control" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+text = "Station Sizes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeaderContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StationSizeLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer/HeaderContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/Control"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -160.0
-offset_right = 40.0
-grow_vertical = 0
-theme_override_constants/separation = 8
-
-[node name="AmmoProgressBar" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer/Control/HBoxContainer"]
-unique_name_in_owner = true
-modulate = Color(0.6192558, 0.40973914, 0, 1)
-custom_minimum_size = Vector2(32, 160)
-layout_mode = 2
-max_value = 1.0
-step = 0.001
-fill_mode = 3
-show_percentage = false
-
-[node name="BoostProgressBar" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer/Control/HBoxContainer"]
-unique_name_in_owner = true
-modulate = Color(2.8878452e-07, 0.5397682, 0.65460134, 1)
-custom_minimum_size = Vector2(32, 160)
-layout_mode = 2
-max_value = 1.0
-step = 0.001
-fill_mode = 3
-show_percentage = false
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="FooterContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Resources" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(64, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/FooterContainer"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+[node name="AmmoProgressBar" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer/FooterContainer/HBoxContainer"]
 unique_name_in_owner = true
+modulate = Color(0.82311094, 0.54746526, 1.540184e-06, 1)
+custom_minimum_size = Vector2(32, 160)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+fill_mode = 3
+show_percentage = false
+
+[node name="BoostProgressBar" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer/FooterContainer/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.10701548, 0.83430797, 0.99999994, 1)
+custom_minimum_size = Vector2(32, 160)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+fill_mode = 3
+show_percentage = false
+
+[node name="ResourceProgressBar" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer/FooterContainer/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.75027806, 0.51101995, 1, 1)
+custom_minimum_size = Vector2(32, 160)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+fill_mode = 3
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer/FooterContainer"]
+unique_name_in_owner = true
+modulate = Color(5.7756904e-07, 0.9628027, 0.20362848, 1)
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
 max_value = 1.0
 step = 0.001
 value = 1.0
 show_percentage = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer/FooterContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/FooterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Expansion Potential"
+
+[node name="StationResourceLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer/FooterContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 80
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("6_n6hgd")]
 position = Vector2(350, 0)
@@ -148,4 +185,4 @@ area_base = 1280.0
 [connection signal="ammo_ratio_changed" from="Player" to="." method="_on_player_ammo_ratio_changed"]
 [connection signal="boost_ratio_changed" from="Player" to="." method="_on_player_boost_ratio_changed"]
 [connection signal="heatlh_changed" from="Player" to="." method="_on_player_heatlh_changed"]
-[connection signal="resources_updated" from="Player" to="." method="_on_player_resources_updated"]
+[connection signal="resource_ratio_changed" from="Player" to="." method="_on_player_resource_ratio_changed"]
