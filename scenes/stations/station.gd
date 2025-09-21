@@ -43,6 +43,7 @@ enum PartType {
 @onready var station_parts : TileMapLayer = %StationParts
 @onready var cell_size := station_parts.tile_set.tile_size
 @onready var damage_animation_player = %DamageAnimationPlayer
+@onready var hurt_stream_player_2d = %HurtStreamPlayer2D
 
 var is_center_destroyed : bool = false
 var is_destroyed : bool = false
@@ -282,6 +283,7 @@ func _on_station_parts_tile_damaged(tile_id, amount):
 	if part_type == PartType.CENTER:
 		health -= amount
 		damage_animation_player.play(&"DAMAGE")
+		hurt_stream_player_2d.play()
 		if health > 0:
 			return
 	_destroy_cell(tile_id)
