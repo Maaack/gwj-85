@@ -99,6 +99,7 @@ texture = ExtResource("2_p2oen")
 2:3/0/terrains_peering_bit/bottom_side = 0
 2:3/0/terrains_peering_bit/left_side = 0
 2:3/0/terrains_peering_bit/top_side = 0
+3:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_fbgwf"]
 physics_layer_0/collision_layer = 2
@@ -119,7 +120,7 @@ projectile_scenes = Array[PackedScene]([ExtResource("2_fbgwf")])
 unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(-8, -8)
-tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAABAAAAAQADAAIAAAD//wAAAQABAAMAAAABAP//AQAAAAIAAAABAAEAAQACAAEAAAD/////AQAAAAIAAAD//wEAAQACAAEAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAQADAAMAAAABAAAAAQADAAIAAAD//wAAAQABAAMAAAABAP//AQAAAAIAAAABAAEAAQACAAEAAAD/////AQAAAAIAAAD//wEAAQACAAEAAAA=")
 tile_set = SubResource("TileSet_fbgwf")
 script = ExtResource("3_3ic5c")
 
