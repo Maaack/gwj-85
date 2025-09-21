@@ -1,7 +1,7 @@
 class_name Fuel2D
 extends CharacterBody2D
 
-@export var fuel := 3.0
+@export var fuel := 4.0
 
 var destroyed : bool = false
 

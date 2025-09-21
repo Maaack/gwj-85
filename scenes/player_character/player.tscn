@@ -305,14 +305,14 @@ max_amount = 50.0
 [node name="BoostStorageComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("7_hb7qo")
-amount = 6.0
-max_amount = 6.0
+amount = 8.0
+max_amount = 8.0
 
 [node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("boost_storage", "animation_player")]
 script = ExtResource("2_3lgnh")
 boost_storage = NodePath("../BoostStorageComponent")
 animation_player = NodePath("../AnimationPlayer")
-move_speed = 50.0
+move_speed = 40.0
 always_moving = true
 
 [node name="FireController" type="Node" parent="." node_paths=PackedStringArray("player_controller", "ammo_storage")]

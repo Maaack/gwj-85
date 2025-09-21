@@ -23,7 +23,7 @@ enum PartType {
 
 @export var enemy : bool = false
 @export var resources : int = 0
-@export var health : int = 10
+@export var health : float = 3
 @export var size_limit : int = 8
 @export var fire_delay : float = 0.4
 @export var part_fire_delay : float = 1.0
@@ -34,6 +34,7 @@ enum PartType {
 @onready var astar = AStar2D.new()
 @onready var station_parts : TileMapLayer = %StationParts
 @onready var cell_size := station_parts.tile_set.tile_size
+@onready var damage_animation_player = %DamageAnimationPlayer
 
 var is_destroyed : bool = false
 var connected_parts : Array
@@ -189,6 +190,7 @@ func _expand_station_with_part(cellv : Vector2i):
 	create_pathfinding_points()
 
 func expand_station(expand_max : int = 0) -> int:
+	if is_destroyed: return 0
 	var extra_resources := resources
 	if expand_max == 0:
 		expand_max = extra_resources
@@ -218,19 +220,51 @@ func _ready():
 		station_parts.tile_set = new_tile_set
 
 func _on_friendly_area_2d_body_entered(body):
+	if is_destroyed or enemy: return
 	if body.has_method("remove_all_resources"):
 		resources += body.remove_all_resources()
 
-func _on_station_parts_tile_damaged(tile_id, _amount):
-	var part_type := tile_type_map[tile_id]
-	if part_type in [PartType.ARM, PartType.JUNCTION] : return
+func _get_tile_neighbors(tile_id : Vector2i) -> Array[Vector2i]:
+	var tile_neighbors : Array[Vector2i]
+	for direction in CARDINAL_DIRECTIONS:
+		var neighboring_tile = tile_id + direction
+		if station_parts.get_cell_source_id(neighboring_tile) != -1:
+			tile_neighbors.append(neighboring_tile)
+	return tile_neighbors
+
+func _neighboring_tile_destroyed(tile_id: Vector2i) -> void:
+	var tile_type := tile_type_map[tile_id]
+	if tile_id in disconnected_parts or tile_type == PartType.ARM:
+		await get_tree().create_timer(0.5, false).timeout
+		_destroy_cell(tile_id)
+	if tile_type == PartType.JUNCTION:
+		if _get_tile_neighbors(tile_id).size() == 1:
+			await get_tree().create_timer(0.5, false).timeout
+			_destroy_cell(tile_id)
+
+func _destroy_neighboring_tiles(tile_id: Vector2i)-> void:
+	for neighboring_tile in _get_tile_neighbors(tile_id):
+		_neighboring_tile_destroyed(neighboring_tile)
+
+func _destroy_cell(tile_id: Vector2i) -> void:
 	station_parts.set_cell(tile_id)
 	create_pathfinding_points()
-	for part in disconnected_parts:
-		station_parts.set_cell(part)
-	if connected_parts.is_empty():
+	_destroy_neighboring_tiles(tile_id)
+	if tile_id == Vector2i.ZERO:
 		is_destroyed = true
 		destroyed.emit()
+	if point_id_position_map.is_empty():
+		queue_free()
+
+func _on_station_parts_tile_damaged(tile_id, amount):
+	var part_type := tile_type_map[tile_id]
+	if part_type in [PartType.ARM, PartType.JUNCTION] : return
+	if part_type == PartType.CENTER:
+		health -= amount
+		damage_animation_player.play(&"DAMAGE")
+		if health > 0:
+			return
+	_destroy_cell(tile_id)
 
 func _get_player_vector(tile_id : Vector2i) -> Vector2:
 	var world_position := global_position + Vector2(tile_id * cell_size) 
