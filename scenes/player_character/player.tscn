@@ -293,8 +293,8 @@ vframes = 3
 [node name="HealthComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("6_0sa2d")
-starting_health = 10.0
-max_health = 10.0
+starting_health = 20.0
+max_health = 20.0
 
 [node name="AmmoStorageComponent" type="Node" parent="."]
 unique_name_in_owner = true
@@ -305,8 +305,8 @@ max_amount = 80.0
 [node name="BoostStorageComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("7_hb7qo")
-amount = 16.0
-max_amount = 16.0
+amount = 20.0
+max_amount = 20.0
 
 [node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("boost_storage", "animation_player")]
 script = ExtResource("2_3lgnh")
