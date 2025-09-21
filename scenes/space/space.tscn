@@ -16,7 +16,7 @@ script = ExtResource("1_718x5")
 
 [node name="Station" parent="." instance=ExtResource("3_x217o")]
 modulate = Color(0.5158667, 0.5158667, 0.5158666, 1)
-fire_delay = 2.0
+fire_delay = 1.0
 projectile_scenes = Array[PackedScene]([ExtResource("3_n6hgd"), ExtResource("4_wfdyj"), ExtResource("5_5v2dy")])
 asteroid_projectile_scenes = Array[PackedScene]([ExtResource("6_pcxls")])
 

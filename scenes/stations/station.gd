@@ -362,5 +362,9 @@ func _process(delta):
 	for shooting_position in shooting_cooldown_map:
 		shooting_cooldown_map[shooting_position] -= delta
 	if shooting_cooldown > 0: return
-	if not _shoot_at_player():
-		_shoot_at_asteroids()
+	if enemy:
+		if not _shoot_at_player():
+			_shoot_at_asteroids()
+	else:
+		if not _shoot_at_asteroids():
+			_shoot_at_player()
