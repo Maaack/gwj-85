@@ -31,7 +31,7 @@ enum PartType {
 @export var part_fire_delay : float = 1.0
 @export var projectile_velocity : float = 80.0
 @export var projectile_scenes : Array[PackedScene]
-
+@export var asteroid_projectile_scenes : Array[PackedScene]
 
 @onready var astar = AStar2D.new()
 @onready var station_parts : TileMapLayer = %StationParts
@@ -279,6 +279,20 @@ func _get_player_vector(tile_id : Vector2i) -> Vector2:
 	var player := get_tree().get_first_node_in_group(&"player")
 	return player.global_position - world_position
 
+func _get_asteroid_vector(tile_id : Vector2i) -> Vector2:
+	var world_position := global_position + Vector2(tile_id * cell_size) 
+	var asteroids := get_tree().get_nodes_in_group(&"asteroid")
+	var closest_distance_squared : float = INF
+	var closest_asteroid : Node2D
+	for asteroid in asteroids:
+		if asteroid is Node2D:
+			var distance_squared:float = asteroid.global_position.distance_squared_to(global_position)
+			if distance_squared < closest_distance_squared:
+				closest_distance_squared = distance_squared
+				closest_asteroid = asteroid
+	if closest_asteroid == null : return Vector2.ZERO
+	return closest_asteroid.global_position - world_position
+
 func _get_shooting_positions_in_range_of_player(max_range : float = 100) -> Array[Vector2i]:
 	var in_range_positions : Array[Vector2i]
 	for shooting_position in shooting_positions:
@@ -287,12 +301,16 @@ func _get_shooting_positions_in_range_of_player(max_range : float = 100) -> Arra
 			in_range_positions.append(shooting_position)
 	return in_range_positions
 
-func _process(delta):
-	if is_center_destroyed : return
-	shooting_cooldown -= delta
-	for shooting_position in shooting_cooldown_map:
-		shooting_cooldown_map[shooting_position] -= delta
-	if shooting_cooldown > 0: return
+func _get_shooting_positions_in_range_of_asteroids(max_range : float = 100) -> Array[Vector2i]:
+	var in_range_positions : Array[Vector2i]
+	if get_tree().get_nodes_in_group(&"asteroid").size() == 0: return []
+	for shooting_position in shooting_positions:
+		var distance := _get_asteroid_vector(shooting_position).length()
+		if distance < max_range:
+			in_range_positions.append(shooting_position)
+	return in_range_positions
+
+func _shoot_at_player() -> bool:
 	var in_range_positions := _get_shooting_positions_in_range_of_player()
 	in_range_positions.shuffle()
 	for shooting_position in in_range_positions:
@@ -306,4 +324,31 @@ func _process(delta):
 		bullet_instance.global_position = global_position + Vector2(shooting_position * cell_size)
 		bullet_instance.velocity = _get_player_vector(shooting_position).normalized() * projectile_velocity
 		GameEvents.object_spawned.emit(bullet_instance)
-		break
+		return true
+	return false
+	
+func _shoot_at_asteroids() -> bool:
+	var in_range_positions := _get_shooting_positions_in_range_of_asteroids()
+	in_range_positions.shuffle()
+	for shooting_position in in_range_positions:
+		if shooting_position in shooting_cooldown_map and shooting_cooldown_map[shooting_position] > 0.0:
+			continue
+		if shooting_position != Vector2i.ZERO:
+			shooting_cooldown_map[shooting_position] = part_fire_delay
+		shooting_cooldown = fire_delay
+		var projectile_scene = asteroid_projectile_scenes.pick_random()
+		var bullet_instance : CharacterBody2D = projectile_scene.instantiate()
+		bullet_instance.global_position = global_position + Vector2(shooting_position * cell_size)
+		bullet_instance.velocity = _get_asteroid_vector(shooting_position).normalized() * projectile_velocity
+		GameEvents.object_spawned.emit(bullet_instance)
+		return true
+	return false
+
+func _process(delta):
+	if is_center_destroyed : return
+	shooting_cooldown -= delta
+	for shooting_position in shooting_cooldown_map:
+		shooting_cooldown_map[shooting_position] -= delta
+	if shooting_cooldown > 0: return
+	if not _shoot_at_player():
+		_shoot_at_asteroids()
