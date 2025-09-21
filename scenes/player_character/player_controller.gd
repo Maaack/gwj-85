@@ -24,20 +24,20 @@ var control_locked : bool = false
 
 func get_direction(from_vector : Vector2) -> StringName:
 	var direction : StringName = &"N"
-	if from_vector.x > 0:
+	if from_vector.x > 0.33:
 		direction = &"E"
-		if from_vector.y > 0:
+		if from_vector.y > 0.33:
 			direction = &"SE"
-		elif from_vector.y < 0:
+		elif from_vector.y < -0.33:
 			direction = &"NE"
-	elif from_vector.x < 0:
+	elif from_vector.x < -0.33:
 		direction = &"W"
-		if from_vector.y > 0:
+		if from_vector.y > 0.33:
 			direction = &"SW"
-		elif from_vector.y < 0:
+		elif from_vector.y < -0.33:
 			direction = &"NW"
 	else:
-		if from_vector.y > 0:
+		if from_vector.y > 0.33:
 			direction = &"S"
 	return direction
 		
@@ -46,7 +46,7 @@ func _process(delta) -> void:
 	var new_facing_vector : Vector2
 	var current_boost_mod : float = 1.0
 	if not control_locked:
-		new_facing_vector = Input.get_vector(move_left_action, move_right_action, move_up_action, move_down_action)
+		new_facing_vector = Input.get_vector(move_left_action, move_right_action, move_up_action, move_down_action).normalized()
 	else:
 		new_facing_vector = -colliding_vector
 	if not new_facing_vector.is_zero_approx():
