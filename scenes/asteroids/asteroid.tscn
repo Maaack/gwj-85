@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0bfytfwc4v4t"]
+[gd_scene load_steps=6 format=3 uid="uid://b0bfytfwc4v4t"]
 
 [ext_resource type="Script" uid="uid://xwejofp7xu8" path="res://scenes/asteroids/asteroid.gd" id="1_nxpf8"]
 [ext_resource type="Texture2D" uid="uid://dx5cfakpp512d" path="res://assets/sprites/meteor_large.png" id="1_ujvpl"]
+[ext_resource type="PackedScene" uid="uid://d2t0x3fku73e7" path="res://scenes/stations/asteroid_explosion.tscn" id="2_i3arg"]
 [ext_resource type="PackedScene" uid="uid://l0fvn0dl80xb" path="res://scenes/objects/resource.tscn" id="2_xn8ob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nxpf8"]
@@ -14,6 +15,7 @@ collision_mask = 31
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_nxpf8")
+explosion_scene = ExtResource("2_i3arg")
 resource_scene = ExtResource("2_xn8ob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

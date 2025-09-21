@@ -2,6 +2,7 @@ class_name Asteroid2D
 extends RigidBody2D
 
 
+@export var explosion_scene : PackedScene
 @export var game_mass : int = 4
 @export var pieces : int = 2
 @export var spawn_speed : float = 25.0
@@ -24,6 +25,9 @@ func damage(_amount : int = 1):
 			asteroid_instance.global_position = global_position + (Vector2.from_angle(direction) * 4)
 			asteroid_instance.linear_velocity = spawn_speed * Vector2.from_angle(direction)
 			GameEvents.object_spawned.emit(asteroid_instance)
+			var explosion_instance : Node2D = explosion_scene.instantiate()
+			explosion_instance.global_position = global_position
+			GameEvents.object_spawned.emit(explosion_instance)
 	else:
 		var resource_instance : Node2D = resource_scene.instantiate()
 		resource_instance.global_position = global_position
