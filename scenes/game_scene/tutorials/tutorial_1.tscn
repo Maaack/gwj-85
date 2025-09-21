@@ -29,6 +29,6 @@ You are always moving,
 and diagonal movement is also possible.
 
 You can fly over your station.
-You cannot fly over enemy stations.
+You [b]cannot[/b] fly over enemy stations.
 [/center]"
 fit_content = true

@@ -22,9 +22,9 @@ text = "Collecting and Expanding"
 visible = true
 
 [node name="DescriptionLabel" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin" index="0"]
-text = "[center]Your station will launch power ups at your ship from the nodes and center.
+text = "[center]Your station will launch [b]power ups[/b] at your ship from the nodes and center.
 
-Asteroids drop raw materials that you can bring back to your station center to expand it.
+Asteroids drop [b]raw materials[/b] that you can bring back to your station center to [i]expand[/i] it.
 
 Resources are shown in the bottom left:
 [color=orange]Ammo[/color]

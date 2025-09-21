@@ -222,7 +222,7 @@ func expand_station(expand_max : int = 0) -> int:
 	return expanded
 
 func _on_timer_timeout():
-	expand_station(2)
+	expand_station(1)
 
 func _ready():
 	create_pathfinding_points()

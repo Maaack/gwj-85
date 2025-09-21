@@ -177,7 +177,7 @@ tile_set = SubResource("TileSet_fbgwf")
 script = ExtResource("3_3ic5c")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 2.0
 autostart = true
 
 [node name="FriendlyArea2D" type="Area2D" parent="."]
