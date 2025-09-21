@@ -37,3 +37,8 @@ License: [GNU General Public License version 2](https://opensource.org/licenses/
 Author: [Eric Fredricksen](http://fredricksen.net/)  
 Source: [github: jsfxr](https://github.com/chr15m/jsfxr)  
 License: [Unlicense license](https://github.com/chr15m/jsfxr?tab=Unlicense-1-ov-file#readme)  
+
+### Piskel
+Author: [Julian Descottes](https://github.com/juliandescottes)  
+Source: [piskelapp.com](https://www.piskelapp.com/)  
+License: [Apache License 2.0](https://github.com/piskelapp/piskel/blob/master/LICENSE)  
