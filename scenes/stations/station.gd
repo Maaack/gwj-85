@@ -23,7 +23,8 @@ enum PartType {
 	TIP
 }
 
-@export var explosion_scene : PackedScene
+@export var station_explosion_scene : PackedScene
+@export var part_explosion_scene : PackedScene
 @export var enemy : bool = false
 @export var resources : int = 0 :
 	set(value):
@@ -259,12 +260,16 @@ func _destroy_neighboring_tiles(tile_id: Vector2i)-> void:
 func _destroy_cell(tile_id: Vector2i) -> void:
 	station_parts.set_cell(tile_id)
 	create_pathfinding_points()
+	var explosion_instance : Node2D
 	if tile_id == Vector2i.ZERO:
 		is_center_destroyed = true
 		center_destroyed.emit()
-		var explosion_instance : Node2D = explosion_scene.instantiate()
+		explosion_instance = station_explosion_scene.instantiate()
 		explosion_instance.global_position = global_position
-		GameEvents.object_spawned.emit(explosion_instance)
+	else:
+		explosion_instance = part_explosion_scene.instantiate()
+		explosion_instance.global_position = global_position + Vector2(tile_id * cell_size)
+	GameEvents.object_spawned.emit(explosion_instance)
 	_destroy_neighboring_tiles(tile_id)
 	if point_id_position_map.is_empty() and not is_destroyed:
 		is_destroyed = true
@@ -282,12 +287,12 @@ func _on_station_parts_tile_damaged(tile_id, amount):
 	_destroy_cell(tile_id)
 
 func _get_player_vector(tile_id : Vector2i) -> Vector2:
-	var world_position := global_position + Vector2(tile_id * cell_size) 
+	var world_position := global_position + Vector2(tile_id * cell_size)
 	var player := get_tree().get_first_node_in_group(&"player")
 	return player.global_position - world_position
 
 func _get_asteroid_vector(tile_id : Vector2i) -> Vector2:
-	var world_position := global_position + Vector2(tile_id * cell_size) 
+	var world_position := global_position + Vector2(tile_id * cell_size)
 	var asteroids := get_tree().get_nodes_in_group(&"asteroid")
 	var closest_distance_squared : float = INF
 	var closest_asteroid : Node2D
