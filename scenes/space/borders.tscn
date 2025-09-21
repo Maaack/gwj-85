@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://dicjk5qi0cyja"]
+
+[ext_resource type="Script" path="res://scenes/space/borders.gd" id="1_kc14o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06uhe"]
+resource_local_to_scene = true
+size = Vector2(160, 2)
+
+[node name="BordersBody2D" type="StaticBody2D"]
+script = ExtResource("1_kc14o")
+area_base = 160.0
+
+[node name="NorthBorder" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -80)
+shape = SubResource("RectangleShape2D_06uhe")
+
+[node name="EastBorder" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(80, 0)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_06uhe")
+
+[node name="SouthBorder" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 80)
+shape = SubResource("RectangleShape2D_06uhe")
+
+[node name="WestBorder" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-80, 0)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_06uhe")
+
+[node name="Line2D" type="Line2D" parent="."]
+unique_name_in_owner = true
+points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
+closed = true
+width = 2.0
