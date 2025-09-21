@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dihrvlelgw1hq"]
+[gd_scene load_steps=15 format=3 uid="uid://dihrvlelgw1hq"]
 
 [ext_resource type="Script" uid="uid://06q0y3pvo6ae" path="res://scenes/space/space.gd" id="1_718x5"]
 [ext_resource type="PackedScene" uid="uid://k4l4k4ev6t7x" path="res://scenes/player_character/player.tscn" id="2_x217o"]
@@ -10,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://d5pko5l0mapi" path="res://scenes/space/asteroid_spawner.tscn" id="6_n6hgd"]
 [ext_resource type="PackedScene" uid="uid://dy4jpp8ac8ixh" path="res://scenes/projectiles/bullet.tscn" id="6_pcxls"]
 [ext_resource type="PackedScene" uid="uid://dicjk5qi0cyja" path="res://scenes/space/borders.tscn" id="8_npeeh"]
+[ext_resource type="Script" uid="uid://cixoduw30dw26" path="res://scenes/game_scene/tutorial_manager.gd" id="11_vho6q"]
+[ext_resource type="PackedScene" uid="uid://d4fpfp685nnh6" path="res://scenes/game_scene/tutorials/tutorial_1.tscn" id="12_pp5mj"]
+[ext_resource type="PackedScene" uid="uid://p6u1aj0axvkr" path="res://scenes/game_scene/tutorials/tutorial_2.tscn" id="13_hbnr3"]
+[ext_resource type="PackedScene" uid="uid://dak1vc4mccwfy" path="res://scenes/game_scene/tutorials/tutorial_3.tscn" id="14_5w1rd"]
 
 [node name="Space" type="Node"]
 script = ExtResource("1_718x5")
@@ -180,6 +184,11 @@ autostart = true
 
 [node name="BordersBody2D" parent="." instance=ExtResource("8_npeeh")]
 area_base = 1280.0
+
+[node name="TutorialManager" type="Node" parent="."]
+script = ExtResource("11_vho6q")
+tutorial_scenes = Array[PackedScene]([ExtResource("12_pp5mj"), ExtResource("13_hbnr3"), ExtResource("14_5w1rd")])
+auto_open = true
 
 [connection signal="timeout" from="GiveEnemiesResourceTimer" to="." method="_on_give_enemies_resource_timer_timeout"]
 [connection signal="ammo_ratio_changed" from="Player" to="." method="_on_player_ammo_ratio_changed"]

@@ -1,8 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://d4fpfp685nnh6"]
 
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/overlaid_menu/overlaid_menu.tscn" id="1_b2dkv"]
+[ext_resource type="PackedScene" uid="uid://wny2d8dvp3ok" path="res://addons/maaacks_game_template/base/scenes/overlaid_menu/overlaid_menu.tscn" id="1_b2dkv"]
 
 [node name="Tutorial1" instance=ExtResource("1_b2dkv")]
+process_mode = 3
+pauses_game = true
 
 [node name="MenuPanelContainer" parent="." index="1"]
 offset_left = -206.0
@@ -14,12 +16,19 @@ offset_bottom = 76.0
 theme_override_constants/separation = 16
 
 [node name="TitleLabel" parent="MenuPanelContainer/MarginContainer/BoxContainer/TitleMargin" index="0"]
-text = "Tutorial"
+text = "Moving"
 
 [node name="DescriptionMargin" parent="MenuPanelContainer/MarginContainer/BoxContainer" index="1"]
 visible = true
 
 [node name="DescriptionLabel" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin" index="0"]
-text = "[center]Click the Win button to progress.
-Click the Lose button to try again.[/center]"
+text = "[center]Control with Arrow Keys, Z and X,
+or WASD, Space, and Shift.
+
+You are always moving,
+and diagonal movement is also possible.
+
+You can fly over your station.
+You cannot fly over enemy stations.
+[/center]"
 fit_content = true
