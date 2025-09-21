@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cguwa5x6ublll"]
+[gd_scene load_steps=9 format=3 uid="uid://cguwa5x6ublll"]
 
 [ext_resource type="PackedScene" uid="uid://c6k5nnpbypshi" path="res://addons/maaacks_game_template/base/scenes/menus/main_menu/main_menu.tscn" id="1_peecx"]
 [ext_resource type="Script" uid="uid://cid3o3n422rr" path="res://scenes/menus/main_menu/main_menu.gd" id="2_ub2bi"]
 [ext_resource type="PackedScene" uid="uid://bvpo2aaxb0kne" path="res://scenes/menus/options_menu/master_options_menu_with_tabs.tscn" id="3_x31ro"]
 [ext_resource type="PackedScene" uid="uid://bmtrwx8y7gtjy" path="res://scenes/credits/scrollable_credits.tscn" id="4_0jpat"]
+[ext_resource type="Texture2D" uid="uid://syf2a0v0we6s" path="res://assets/sprites/background-layer-3.png" id="5_0jpat"]
+[ext_resource type="Texture2D" uid="uid://dvhj5xbyj1uqj" path="res://assets/sprites/background-layer-2.png" id="6_m0ubd"]
+[ext_resource type="Texture2D" uid="uid://b2ggrv51nq0am" path="res://assets/sprites/background-2x2.png" id="7_627ab"]
+[ext_resource type="PackedScene" uid="uid://cfnjrkkxhmy3i" path="res://scenes/space/dummy_station_spawner.tscn" id="8_m0ubd"]
 
 [node name="MainMenu" instance=ExtResource("1_peecx")]
 script = ExtResource("2_ub2bi")
@@ -12,6 +16,61 @@ confirm_new_game = false
 game_scene_path = "res://scenes/game_scene/game_ui.tscn"
 options_packed_scene = ExtResource("3_x31ro")
 credits_packed_scene = ExtResource("4_0jpat")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" index="0"]
+size = Vector2i(1240, 720)
+
+[node name="Parallax2D3" type="Parallax2D" parent="SubViewportContainer/SubViewport" index="0"]
+scroll_scale = Vector2(0.063, 0.063)
+repeat_size = Vector2(512, 512)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Parallax2D3" index="0"]
+modulate = Color(1, 1, 1, 0.24705882)
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("5_0jpat")
+
+[node name="Parallax2D2" type="Parallax2D" parent="SubViewportContainer/SubViewport" index="1"]
+scroll_scale = Vector2(0.125, 0.125)
+repeat_size = Vector2(512, 512)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Parallax2D2" index="0"]
+modulate = Color(1, 1, 1, 0.49803922)
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("6_m0ubd")
+
+[node name="Parallax2D" type="Parallax2D" parent="SubViewportContainer/SubViewport" index="2"]
+texture_repeat = 2
+scroll_scale = Vector2(0.25, 0.25)
+repeat_size = Vector2(512, 512)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Parallax2D" index="0"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("7_627ab")
+hframes = 2
+vframes = 2
+
+[node name="DummyStationSpawner" parent="SubViewportContainer/SubViewport" index="3" instance=ExtResource("8_m0ubd")]
+position = Vector2(191, 83)
+spawn_range = 200.0
+spawn_delay = 0.5
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport" index="4"]
+zoom = Vector2(2, 2)
 
 [node name="TitleMargin" parent="MenuContainer" index="0"]
 theme_override_constants/margin_left = 64
@@ -58,7 +117,7 @@ visible = false
 layout_mode = 2
 text = "Level Select"
 
-[node name="LevelSelectContainer" type="MarginContainer" parent="." index="7"]
+[node name="LevelSelectContainer" type="MarginContainer" parent="." index="8"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -72,7 +131,7 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 32
 
-[node name="NewGameConfirmationDialog" type="ConfirmationDialog" parent="." index="9"]
+[node name="NewGameConfirmationDialog" type="ConfirmationDialog" parent="." index="10"]
 unique_name_in_owner = true
 auto_translate_mode = 1
 title = "Start a New Game?"

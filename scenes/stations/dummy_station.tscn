@@ -1,0 +1,242 @@
+[gd_scene load_steps=15 format=4 uid="uid://c0t6rc4sv840e"]
+
+[ext_resource type="Script" uid="uid://di61vufuvg7px" path="res://scenes/stations/dummy_station.gd" id="1_r57am"]
+[ext_resource type="Texture2D" uid="uid://dhbyaxm3n57rj" path="res://assets/sprites/white-station.png" id="5_1waj8"]
+[ext_resource type="Script" uid="uid://1fre8nchd36n" path="res://scenes/stations/station_parts.gd" id="6_212c1"]
+[ext_resource type="AudioStream" uid="uid://dggdqaehe1nse" path="res://assets/sfx/hit_hurt_station.wav" id="7_k7kqf"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ic5c"]
+texture = ExtResource("5_1waj8")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -8, 2, -8, 2, 8, -2, 8)
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/top_side = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -2, 8, 2, -8, 2, -8, -2)
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2, -8, -2, -2, -2, -2, -8, 2, -8, 2, 2)
+2:0/0/terrains_peering_bit/left_side = 0
+2:0/0/terrains_peering_bit/top_side = 0
+3:0/0 = 0
+3:0/0/terrain_set = 0
+3:0/0/terrain = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, 8, -2, 8, -2, 2, -8, 2, -8, -2, 2, -2)
+3:0/0/terrains_peering_bit/bottom_side = 0
+3:0/0/terrains_peering_bit/left_side = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -2, 8, 2, 2, 2, 2, 8, -2, 8, -2, -2)
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -8, 2, -8, 2, -2, 8, -2, 8, 2, -2, 2)
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/top_side = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -8, 2, -8, 2, -4, 4, -2, 4, 2, 2, 4, -2, 4, -4, 2, -4, -2, -2, -4)
+2:1/0/terrains_peering_bit/top_side = 0
+3:1/0 = 0
+3:1/0/terrain_set = 0
+3:1/0/terrain = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2, -8, -2, -4, -2, -2, -4, 2, -4, 4, -2, 4, 2, 2, 4, -2, 4, -4, 2)
+3:1/0/terrains_peering_bit/left_side = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, 8, -2, 8, -2, 4, -4, 2, -4, -2, -2, -4, 2, -4, 4, -2, 4, 2, 2, 4)
+0:2/0/terrains_peering_bit/bottom_side = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -2, 8, 2, 4, 2, 2, 4, -2, 4, -4, 2, -4, -2, -2, -4, 2, -4, 4, -2)
+1:2/0/terrains_peering_bit/right_side = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -8, 2, -8, 2, -2, 8, -2, 8, 2, -8, 2, -8, -2, -2, -2)
+2:2/0/terrains_peering_bit/right_side = 0
+2:2/0/terrains_peering_bit/left_side = 0
+2:2/0/terrains_peering_bit/top_side = 0
+3:2/0 = 0
+3:2/0/terrain_set = 0
+3:2/0/terrain = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2, -8, -2, -2, -2, -2, -8, 2, -8, 2, 8, -2, 8, -2, 2)
+3:2/0/terrains_peering_bit/bottom_side = 0
+3:2/0/terrains_peering_bit/left_side = 0
+3:2/0/terrains_peering_bit/top_side = 0
+0:3/0 = 0
+0:3/0/terrain_set = 0
+0:3/0/terrain = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, 8, -2, 8, -2, 2, -8, 2, -8, -2, 8, -2, 8, 2, 2, 2)
+0:3/0/terrains_peering_bit/right_side = 0
+0:3/0/terrains_peering_bit/bottom_side = 0
+0:3/0/terrains_peering_bit/left_side = 0
+1:3/0 = 0
+1:3/0/terrain_set = 0
+1:3/0/terrain = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -2, 8, 2, 2, 2, 2, 8, -2, 8, -2, -8, 2, -8, 2, -2)
+1:3/0/terrains_peering_bit/right_side = 0
+1:3/0/terrains_peering_bit/bottom_side = 0
+1:3/0/terrains_peering_bit/top_side = 0
+2:3/0 = 0
+2:3/0/terrain_set = 0
+2:3/0/terrain = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -8, 2, -8, 2, -2, 8, -2, 8, 2, 2, 2, 2, 8, -2, 8, -2, 2, -8, 2, -8, -2, -2, -2)
+2:3/0/terrains_peering_bit/right_side = 0
+2:3/0/terrains_peering_bit/bottom_side = 0
+2:3/0/terrains_peering_bit/left_side = 0
+2:3/0/terrains_peering_bit/top_side = 0
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4, 8, -4, 8, 4, -8, 4)
+
+[sub_resource type="TileSet" id="TileSet_fbgwf"]
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 0
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "StationParts"
+terrain_set_0/terrain_0/color = Color(0.517558, 0.251789, 0.609403, 1)
+sources/1 = SubResource("TileSetAtlasSource_3ic5c")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p2oen"]
+
+[sub_resource type="Animation" id="Animation_fbgwf"]
+resource_name = "DAMAGE"
+length = 0.5
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StationParts:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.7529412), Color(1, 1, 1, 1), Color(1, 1, 1, 0.7529412), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ynfrt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StationParts:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2xlx3"]
+_data = {
+&"DAMAGE": SubResource("Animation_fbgwf"),
+&"RESET": SubResource("Animation_ynfrt")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_u1dk1"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("7_k7kqf")
+
+[sub_resource type="Animation" id="Animation_r57am"]
+resource_name = "AUTOPLAY"
+length = 3.0
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StationParts:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.40432906, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kjgep"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StationParts:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_neoxq"]
+_data = {
+&"AUTOPLAY": SubResource("Animation_r57am"),
+&"RESET": SubResource("Animation_kjgep")
+}
+
+[node name="DummyStation" type="Node2D"]
+modulate = Color(1, 1, 1, 0)
+script = ExtResource("1_r57am")
+
+[node name="StationParts" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+position = Vector2(-8, -8)
+tile_map_data = PackedByteArray("AAAAAAAAAQADAAMAAAABAAAAAQADAAIAAAD//wAAAQABAAMAAAABAP//AQAAAAIAAAABAAEAAQACAAEAAAD/////AQAAAAIAAAD//wEAAQACAAEAAAA=")
+tile_set = SubResource("TileSet_fbgwf")
+script = ExtResource("6_212c1")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.063
+autostart = true
+
+[node name="FriendlyArea2D" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FriendlyArea2D"]
+shape = SubResource("CircleShape2D_p2oen")
+
+[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_2xlx3")
+}
+
+[node name="HurtStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_u1dk1")
+volume_db = -10.0
+max_distance = 600.0
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_neoxq")
+}
+autoplay = "AUTOPLAY"
+
+[connection signal="tile_damaged" from="StationParts" to="." method="_on_station_parts_tile_damaged"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="FriendlyArea2D" to="." method="_on_friendly_area_2d_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
