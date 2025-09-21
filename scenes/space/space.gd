@@ -10,16 +10,13 @@ extends Node
 var player_station : SpaceStation2D
 var enemy_stations : Array[SpaceStation2D]
 
-var enemy_stations_destroyed : int = 0
-
 func _on_object_spawned(node_2d : Node2D) -> void:
 	add_child.call_deferred(node_2d)
 
 func _on_enemy_station_destroyed(station : SpaceStation2D) -> void:
-	enemy_stations_destroyed += 1
-	if enemy_stations_destroyed >= enemy_stations.size():
-		GameEvents.enemy_stations_destroyed.emit()
 	enemy_stations.erase(station)
+	if enemy_stations.is_empty():
+		GameEvents.enemy_stations_destroyed.emit()
 
 func _ready() -> void:
 	GameEvents.object_spawned.connect(_on_object_spawned)

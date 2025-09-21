@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://blmqu1s4cnie5"]
+[gd_scene load_steps=12 format=4 uid="uid://blmqu1s4cnie5"]
 
 [ext_resource type="Script" uid="uid://c24inooqjqpcu" path="res://scenes/stations/station.gd" id="1_p2oen"]
 [ext_resource type="PackedScene" uid="uid://op0jpekss5tj" path="res://scenes/projectiles/enemy_bullet.tscn" id="2_fbgwf"]
 [ext_resource type="Texture2D" uid="uid://dhbyaxm3n57rj" path="res://assets/sprites/white-station.png" id="2_p2oen"]
+[ext_resource type="PackedScene" uid="uid://3a687tnw5rqj" path="res://scenes/stations/station_explosion.tscn" id="2_ynfrt"]
 [ext_resource type="Script" uid="uid://1fre8nchd36n" path="res://scenes/stations/station_parts.gd" id="3_3ic5c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ic5c"]
@@ -152,8 +153,10 @@ _data = {
 
 [node name="Station" type="Node2D"]
 script = ExtResource("1_p2oen")
+explosion_scene = ExtResource("2_ynfrt")
+health = 5.0
 part_fire_delay = 2.0
-projectile_velocity = 50.0
+projectile_velocity = 45.0
 projectile_scenes = Array[PackedScene]([ExtResource("2_fbgwf")])
 
 [node name="StationParts" type="TileMapLayer" parent="."]

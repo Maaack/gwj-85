@@ -2,7 +2,7 @@ class_name SpaceStation2D
 extends Node2D
 
 signal resources_changed(delta, reason)
-signal state_changed(resources, damage)
+signal center_destroyed
 signal destroyed
 
 const ENEMY_COLLISION_LAYER = 8
@@ -14,6 +14,7 @@ const CARDINAL_DIRECTIONS : Array = [
 		Vector2i.RIGHT
 	]
 const CANTOR_LIMIT = int(pow(2, 30))
+
 enum PartType {
 	CENTER,
 	ARM,
@@ -21,6 +22,7 @@ enum PartType {
 	TIP
 }
 
+@export var explosion_scene : PackedScene
 @export var enemy : bool = false
 @export var resources : int = 0
 @export var health : float = 3
@@ -36,6 +38,7 @@ enum PartType {
 @onready var cell_size := station_parts.tile_set.tile_size
 @onready var damage_animation_player = %DamageAnimationPlayer
 
+var is_center_destroyed : bool = false
 var is_destroyed : bool = false
 var connected_parts : Array
 var disconnected_parts : Array
@@ -190,7 +193,7 @@ func _expand_station_with_part(cellv : Vector2i):
 	create_pathfinding_points()
 
 func expand_station(expand_max : int = 0) -> int:
-	if is_destroyed: return 0
+	if is_center_destroyed: return 0
 	var extra_resources := resources
 	if expand_max == 0:
 		expand_max = extra_resources
@@ -220,7 +223,7 @@ func _ready():
 		station_parts.tile_set = new_tile_set
 
 func _on_friendly_area_2d_body_entered(body):
-	if is_destroyed or enemy: return
+	if is_center_destroyed or enemy: return
 	if body.has_method("remove_all_resources"):
 		resources += body.remove_all_resources()
 
@@ -249,11 +252,16 @@ func _destroy_neighboring_tiles(tile_id: Vector2i)-> void:
 func _destroy_cell(tile_id: Vector2i) -> void:
 	station_parts.set_cell(tile_id)
 	create_pathfinding_points()
-	_destroy_neighboring_tiles(tile_id)
 	if tile_id == Vector2i.ZERO:
+		is_center_destroyed = true
+		center_destroyed.emit()
+		var explosion_instance : Node2D = explosion_scene.instantiate()
+		explosion_instance.global_position = global_position
+		GameEvents.object_spawned.emit(explosion_instance)
+	_destroy_neighboring_tiles(tile_id)
+	if point_id_position_map.is_empty() and not is_destroyed:
 		is_destroyed = true
 		destroyed.emit()
-	if point_id_position_map.is_empty():
 		queue_free()
 
 func _on_station_parts_tile_damaged(tile_id, amount):
@@ -280,7 +288,7 @@ func _get_shooting_positions_in_range_of_player(max_range : float = 100) -> Arra
 	return in_range_positions
 
 func _process(delta):
-	if is_destroyed : return
+	if is_center_destroyed : return
 	shooting_cooldown -= delta
 	for shooting_position in shooting_cooldown_map:
 		shooting_cooldown_map[shooting_position] -= delta

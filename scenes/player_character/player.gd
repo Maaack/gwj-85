@@ -1,3 +1,4 @@
+class_name PlayerCharacter2D
 extends CharacterBody2D
 
 signal resources_updated(count : int)

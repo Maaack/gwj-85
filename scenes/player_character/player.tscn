@@ -299,14 +299,14 @@ max_health = 10.0
 [node name="AmmoStorageComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("7_hb7qo")
-amount = 50.0
-max_amount = 50.0
+amount = 80.0
+max_amount = 80.0
 
 [node name="BoostStorageComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("7_hb7qo")
-amount = 8.0
-max_amount = 8.0
+amount = 16.0
+max_amount = 16.0
 
 [node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("boost_storage", "animation_player")]
 script = ExtResource("2_3lgnh")
@@ -322,7 +322,7 @@ ammo_storage = NodePath("../AmmoStorageComponent")
 bullet_scene = ExtResource("4_ev6t3")
 spawn_offset = Vector2(5, 0)
 spawn_speed = 100.0
-cooldown_delay = 0.5
+cooldown_delay = 0.4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-7.2399803e-06, -2, 3.0000036, 0.99998915, -2.9999964, 1.0000108)
