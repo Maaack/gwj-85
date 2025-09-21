@@ -17,7 +17,7 @@ extends Node
 @export var collision_lock_delay : float = 0.25
 
 var colliding_vector : Vector2
-var facing_vector : Vector2 = Vector2.UP
+var facing_vector : Vector2
 var control_locked : bool = false
 
 @onready var character_body : CharacterBody2D = get_node(character_body_node_path)

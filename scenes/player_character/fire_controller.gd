@@ -25,6 +25,7 @@ func _process(_delta) -> void:
 	if ammo_storage.amount <= 0:
 		_no_ammo()
 		return
+	if player_controller.facing_vector == Vector2.ZERO: return
 	var bullet_instance : Node2D = bullet_scene.instantiate()
 	bullet_instance.global_position = character_body.global_position + spawn_offset.rotated(player_controller.facing_vector.angle())
 	bullet_instance.velocity = spawn_speed * player_controller.facing_vector

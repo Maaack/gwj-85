@@ -43,9 +43,7 @@ func _ready() -> void:
 			child.destroyed.connect(_on_enemy_station_destroyed.bind(child))
 	ammo_progress_bar.value = 1.0
 	boost_progress_bar.value = 1.0
-	get_tree().paused = true
-	await get_tree().create_timer(3).timeout
-	get_tree().paused = false
+
 
 func _on_player_heatlh_changed(current_health, max_health):
 	if health_bar:
