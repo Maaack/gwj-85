@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dihrvlelgw1hq"]
+[gd_scene load_steps=9 format=3 uid="uid://dihrvlelgw1hq"]
 
 [ext_resource type="Script" uid="uid://06q0y3pvo6ae" path="res://scenes/space/space.gd" id="1_718x5"]
 [ext_resource type="PackedScene" uid="uid://k4l4k4ev6t7x" path="res://scenes/player_character/player.tscn" id="2_x217o"]
 [ext_resource type="PackedScene" uid="uid://dmokh4lufqxx6" path="res://scenes/projectiles/armor.tscn" id="3_n6hgd"]
 [ext_resource type="PackedScene" uid="uid://blmqu1s4cnie5" path="res://scenes/stations/station.tscn" id="3_x217o"]
+[ext_resource type="PackedScene" uid="uid://ce1mhl8pp1fe7" path="res://scenes/projectiles/ammo.tscn" id="4_wfdyj"]
 [ext_resource type="PackedScene" uid="uid://b0bfytfwc4v4t" path="res://scenes/asteroids/asteroid.tscn" id="5_0a2q3"]
 [ext_resource type="PackedScene" uid="uid://d5pko5l0mapi" path="res://scenes/space/asteroid_spawner.tscn" id="6_n6hgd"]
 
@@ -14,9 +15,9 @@ size = Vector2(2000, 20)
 script = ExtResource("1_718x5")
 
 [node name="Station" parent="." instance=ExtResource("3_x217o")]
-fire_delay = 1.0
+fire_delay = 2.0
 projectile_velocity = 45.0
-projectile_scenes = Array[PackedScene]([ExtResource("3_n6hgd")])
+projectile_scenes = Array[PackedScene]([ExtResource("3_n6hgd"), ExtResource("4_wfdyj")])
 
 [node name="Station3" parent="." instance=ExtResource("3_x217o")]
 position = Vector2(284, 267)
@@ -45,6 +46,27 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AmmoProgressBar" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 160)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 4.0
+grow_vertical = 0
+max_value = 1.0
+step = 0.001
+fill_mode = 3
+show_percentage = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
 layout_mode = 2
@@ -99,5 +121,6 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_0a2q3")
 
 [connection signal="timeout" from="GiveEnemiesResourceTimer" to="." method="_on_give_enemies_resource_timer_timeout"]
+[connection signal="ammo_ratio_changed" from="Player" to="." method="_on_player_ammo_ratio_changed"]
 [connection signal="heatlh_changed" from="Player" to="." method="_on_player_heatlh_changed"]
 [connection signal="resources_updated" from="Player" to="." method="_on_player_resources_updated"]

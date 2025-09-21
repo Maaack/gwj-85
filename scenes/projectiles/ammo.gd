@@ -1,7 +1,7 @@
-class_name Armor2D
+class_name Ammo2D
 extends CharacterBody2D
 
-@export var health := 4
+@export var ammo := 25
 
 var destroyed : bool = false
 
@@ -17,8 +17,8 @@ func _physics_process(_delta) -> void:
 		for i in get_slide_collision_count():
 			var collision := get_slide_collision(i)
 			var collider := collision.get_collider()
-			if collider.has_method(&"heal"):
-				collider.heal(health)
+			if collider.has_method(&"add_ammo"):
+				collider.add_ammo(ammo)
 				break
 		destroy()
 

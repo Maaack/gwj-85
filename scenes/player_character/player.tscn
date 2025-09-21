@@ -290,35 +290,38 @@ texture = ExtResource("2_hb7qo")
 hframes = 3
 vframes = 3
 
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("animation_player")]
-script = ExtResource("2_3lgnh")
-animation_player = NodePath("../AnimationPlayer")
-move_speed = 50.0
-always_moving = true
-
-[node name="FireController" type="Node" parent="." node_paths=PackedStringArray("player_controller")]
-script = ExtResource("3_y1h0s")
-player_controller = NodePath("../PlayerController")
-bullet_scene = ExtResource("4_ev6t3")
-spawn_offset = Vector2(15, 0)
-spawn_speed = 100.0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-7.2399803e-06, -2, 3.0000036, 0.99998915, -2.9999964, 1.0000108)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
-
 [node name="HealthComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("6_0sa2d")
 starting_health = 10.0
 max_health = 10.0
 
-[node name="ResourceStorageComponent" type="Node" parent="."]
+[node name="AmmoStorageComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("7_hb7qo")
-max_amount = 5.0
+amount = 50.0
+max_amount = 50.0
+
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("animation_player")]
+script = ExtResource("2_3lgnh")
+animation_player = NodePath("../AnimationPlayer")
+move_speed = 50.0
+always_moving = true
+
+[node name="FireController" type="Node" parent="." node_paths=PackedStringArray("player_controller", "ammo_storage")]
+script = ExtResource("3_y1h0s")
+player_controller = NodePath("../PlayerController")
+ammo_storage = NodePath("../AmmoStorageComponent")
+bullet_scene = ExtResource("4_ev6t3")
+spawn_offset = Vector2(15, 0)
+spawn_speed = 100.0
+cooldown_delay = 0.5
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7.2399803e-06, -2, 3.0000036, 0.99998915, -2.9999964, 1.0000108)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -328,3 +331,4 @@ libraries = {
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="max_health_changed" from="HealthComponent" to="." method="_on_health_component_max_health_changed"]
+[connection signal="storage_ratio_changed" from="AmmoStorageComponent" to="." method="_on_ammo_storage_component_storage_ratio_changed"]

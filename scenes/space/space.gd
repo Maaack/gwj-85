@@ -4,6 +4,7 @@ extends Node
 
 @onready var resources = %Resources
 @onready var health_bar = %HealthBar
+@onready var ammo_progress_bar = %AmmoProgressBar
 
 var player_station : SpaceStation2D
 var enemy_stations : Array[SpaceStation2D]
@@ -43,3 +44,7 @@ func _on_player_resources_updated(count):
 func _on_give_enemies_resource_timer_timeout():
 	for station in enemy_stations:
 		station.resources += 2
+
+func _on_player_ammo_ratio_changed(new_ratio):
+	if ammo_progress_bar:
+		ammo_progress_bar.value = new_ratio
