@@ -20,11 +20,19 @@ projectile_velocity = 45.0
 projectile_scenes = Array[PackedScene]([ExtResource("3_n6hgd"), ExtResource("4_wfdyj")])
 
 [node name="Station3" parent="." instance=ExtResource("3_x217o")]
-position = Vector2(284, 267)
+position = Vector2(-400, 400)
 enemy = true
 
 [node name="Station2" parent="." instance=ExtResource("3_x217o")]
-position = Vector2(556, -1)
+position = Vector2(400, 400)
+enemy = true
+
+[node name="Station5" parent="." instance=ExtResource("3_x217o")]
+position = Vector2(-400, -400)
+enemy = true
+
+[node name="Station4" parent="." instance=ExtResource("3_x217o")]
+position = Vector2(400, -400)
 enemy = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -88,35 +96,50 @@ value = 1.0
 show_percentage = false
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("6_n6hgd")]
-position = Vector2(284, 0)
+position = Vector2(350, 0)
 spawn_scene = ExtResource("5_0a2q3")
+spawn_range = 200.0
+
+[node name="AsteroidSpawner2" parent="." instance=ExtResource("6_n6hgd")]
+position = Vector2(-350, 0)
+spawn_scene = ExtResource("5_0a2q3")
+spawn_range = 200.0
+
+[node name="AsteroidSpawner3" parent="." instance=ExtResource("6_n6hgd")]
+position = Vector2(0, -350)
+spawn_scene = ExtResource("5_0a2q3")
+spawn_range = 200.0
+
+[node name="AsteroidSpawner4" parent="." instance=ExtResource("6_n6hgd")]
+position = Vector2(0, 350)
+spawn_scene = ExtResource("5_0a2q3")
+spawn_range = 200.0
 
 [node name="GiveEnemiesResourceTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("2_x217o")]
-collision_mask = 12
 
 [node name="Barriers2D" type="StaticBody2D" parent="."]
 collision_layer = 17
 collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barriers2D"]
-position = Vector2(0, -600)
+position = Vector2(0, -640)
 shape = SubResource("RectangleShape2D_0a2q3")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Barriers2D"]
-position = Vector2(0, 600)
+position = Vector2(0, 640)
 shape = SubResource("RectangleShape2D_0a2q3")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Barriers2D"]
-position = Vector2(-500, 0)
+position = Vector2(-640, 0)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_0a2q3")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Barriers2D"]
-position = Vector2(1000, 0)
+position = Vector2(640, 0)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_0a2q3")
 

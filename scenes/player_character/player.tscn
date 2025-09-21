@@ -281,7 +281,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_mask = 28
+collision_mask = 29
 script = ExtResource("1_0sa2d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -313,7 +313,7 @@ script = ExtResource("3_y1h0s")
 player_controller = NodePath("../PlayerController")
 ammo_storage = NodePath("../AmmoStorageComponent")
 bullet_scene = ExtResource("4_ev6t3")
-spawn_offset = Vector2(15, 0)
+spawn_offset = Vector2(5, 0)
 spawn_speed = 100.0
 cooldown_delay = 0.5
 

@@ -35,6 +35,7 @@ enum PartType {
 @onready var station_parts : TileMapLayer = %StationParts
 @onready var cell_size := station_parts.tile_set.tile_size
 
+var is_destroyed : bool = false
 var connected_parts : Array
 var disconnected_parts : Array
 var part_distance_map : Dictionary
@@ -222,12 +223,13 @@ func _on_friendly_area_2d_body_entered(body):
 
 func _on_station_parts_tile_damaged(tile_id, _amount):
 	var part_type := tile_type_map[tile_id]
-	if part_type == PartType.ARM : return
+	if part_type in [PartType.ARM, PartType.JUNCTION] : return
 	station_parts.set_cell(tile_id)
 	create_pathfinding_points()
 	for part in disconnected_parts:
 		station_parts.set_cell(part)
 	if connected_parts.is_empty():
+		is_destroyed = true
 		destroyed.emit()
 
 func _get_player_vector(tile_id : Vector2i) -> Vector2:
@@ -244,6 +246,7 @@ func _get_shooting_positions_in_range_of_player(max_range : float = 100) -> Arra
 	return in_range_positions
 
 func _process(delta):
+	if is_destroyed : return
 	shooting_cooldown -= delta
 	for shooting_position in shooting_cooldown_map:
 		shooting_cooldown_map[shooting_position] -= delta
