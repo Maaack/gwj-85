@@ -1,15 +1,16 @@
 [gd_scene load_steps=6 format=3 uid="uid://b0bfytfwc4v4t"]
 
 [ext_resource type="Script" uid="uid://xwejofp7xu8" path="res://scenes/asteroids/asteroid.gd" id="1_nxpf8"]
-[ext_resource type="Texture2D" uid="uid://dx5cfakpp512d" path="res://assets/sprites/meteor_large.png" id="1_ujvpl"]
 [ext_resource type="PackedScene" uid="uid://d2t0x3fku73e7" path="res://scenes/stations/asteroid_explosion.tscn" id="2_i3arg"]
 [ext_resource type="PackedScene" uid="uid://l0fvn0dl80xb" path="res://scenes/objects/resource.tscn" id="2_xn8ob"]
+[ext_resource type="Texture2D" uid="uid://3g1qfcb82568" path="res://assets/sprites/white-asteroid.png" id="4_i3arg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nxpf8"]
 resource_local_to_scene = true
-radius = 22.0
+radius = 32.0
 
 [node name="Asteroid" type="RigidBody2D" groups=["asteroid"]]
+texture_filter = 1
 collision_layer = 16
 collision_mask = 31
 contact_monitor = true
@@ -24,6 +25,6 @@ shape = SubResource("CircleShape2D_nxpf8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("1_ujvpl")
+texture = ExtResource("4_i3arg")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

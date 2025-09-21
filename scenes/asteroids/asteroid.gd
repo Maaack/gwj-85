@@ -6,7 +6,7 @@ extends RigidBody2D
 @export var game_mass : int = 4
 @export var pieces : int = 2
 @export var spawn_speed : float = 25.0
-@export var collider_radius : float = 22.0
+@export var collider_radius : float = 32.0
 @export var resource_scene : PackedScene
 
 @onready var sprite_2d = %Sprite2D

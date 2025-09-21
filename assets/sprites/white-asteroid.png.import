@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csd5xrf7ah2am"
-path="res://.godot/imported/meteor_detailedSmall.png-0a0b936f0916eb541ec125d6fbcd14d9.ctex"
+uid="uid://3g1qfcb82568"
+path="res://.godot/imported/white-asteroid.png-9d30ff88ba8a49e8f923631c3fdc9b4c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/meteor_detailedSmall.png"
-dest_files=["res://.godot/imported/meteor_detailedSmall.png-0a0b936f0916eb541ec125d6fbcd14d9.ctex"]
+source_file="res://assets/sprites/white-asteroid.png"
+dest_files=["res://.godot/imported/white-asteroid.png-9d30ff88ba8a49e8f923631c3fdc9b4c.ctex"]
 
 [params]
 

@@ -1,10 +1,6 @@
 # Attribution
-## Collaborators
-
-### Role
-Person 1  
-Person 2  
-[Person w/ Link]()  
+## Game By
+[Marek Belski](https://maaack.itch.io/)  
 
 ## Sourced
 ### Asset Type
@@ -36,3 +32,8 @@ License: [MIT License](LICENSE.txt)
 Author: [Linus Torvalds](https://github.com/torvalds)  
 Source: [git-scm.com](https://git-scm.com/downloads)  
 License: [GNU General Public License version 2](https://opensource.org/licenses/GPL-2.0)
+
+#### jsfxr
+Author: [Eric Fredricksen](http://fredricksen.net/)  
+Source: [github: jsfxr](https://github.com/chr15m/jsfxr)  
+License: [Unlicense license](https://github.com/chr15m/jsfxr?tab=Unlicense-1-ov-file#readme)  
