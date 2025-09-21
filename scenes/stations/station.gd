@@ -1,7 +1,8 @@
 class_name SpaceStation2D
 extends Node2D
 
-signal resources_changed(delta, reason)
+signal resources_changed(delta)
+signal size_changed(new_size)
 signal center_destroyed
 signal destroyed
 
@@ -24,7 +25,11 @@ enum PartType {
 
 @export var explosion_scene : PackedScene
 @export var enemy : bool = false
-@export var resources : int = 0
+@export var resources : int = 0 :
+	set(value):
+		var _delta = value - resources
+		resources = value
+		resources_changed.emit(_delta)
 @export var health : float = 3
 @export var size_limit : int = 8
 @export var fire_delay : float = 0.4
@@ -75,6 +80,8 @@ func create_pathfinding_points() -> void:
 	for cell_position in point_id_position_map.values():
 		connect_cardinals(cell_position)
 	_map_tiles()
+	size_changed.emit(point_id_position_map.size())
+
 
 func set_path_length(point_path: Array, max_distance: int) -> Array:
 	if max_distance < 0: return point_path

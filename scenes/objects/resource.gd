@@ -4,6 +4,6 @@ extends Area2D
 
 func _on_body_entered(body):
 	if body.has_method("add_resource"):
-		if body.add_resource(resource_amount):
-			GameEvents.resource_collected.emit()
-			queue_free()
+		body.add_resource(resource_amount)
+		GameEvents.resource_collected.emit()
+		queue_free()

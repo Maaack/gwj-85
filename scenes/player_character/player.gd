@@ -1,28 +1,24 @@
 class_name PlayerCharacter2D
 extends CharacterBody2D
 
-signal resources_updated(count : int)
 signal heatlh_changed(current_health : float, max_health: float)
 signal ammo_ratio_changed(new_ratio: float)
 signal boost_ratio_changed(new_ratio: float)
+signal resource_ratio_changed(new_ratio: float)
 signal died
-
-@export var resources : int = 0
 
 @onready var health_component = %HealthComponent
 @onready var ammo_storage_component = %AmmoStorageComponent
 @onready var boost_storage_component = %BoostStorageComponent
+@onready var resource_storage_component = %ResourceStorageComponent
 
 func remove_all_resources() -> int:
-	var return_value := resources
-	resources = 0
-	resources_updated.emit(resources)
+	var return_value : int = round(resource_storage_component.amount)
+	resource_storage_component.amount = 0
 	return return_value
 
-func add_resource(amount : int = 1) -> bool:
-	resources += amount
-	resources_updated.emit(resources)
-	return true
+func add_resource(amount : int = 1) -> void:
+	resource_storage_component.add(amount)
 
 func damage(amount : float) -> void:
 	health_component.damage(amount)
@@ -56,3 +52,6 @@ func _on_ammo_storage_component_storage_ratio_changed(new_value):
 
 func _on_boost_storage_component_storage_ratio_changed(new_value):
 	boost_ratio_changed.emit(new_value)
+
+func _on_resource_storage_component_storage_ratio_changed(new_value):
+	resource_ratio_changed.emit(new_value)
