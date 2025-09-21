@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://r87ochue4usc"]
+
+[ext_resource type="Script" uid="uid://c1f3fvcki6vl3" path="res://scenes/projectiles/fuel.gd" id="1_s0twi"]
+[ext_resource type="Texture2D" uid="uid://dob036y738vid" path="res://assets/sprites/star_tiny.png" id="2_lxec5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5f1na"]
+radius = 2.0
+
+[node name="Fuel" type="CharacterBody2D"]
+modulate = Color(2.3102762e-06, 0.64350533, 0.72646105, 1)
+collision_layer = 0
+script = ExtResource("1_s0twi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lxec5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5f1na")
+
+[node name="DecayTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="DecayTimer" to="." method="_on_decay_timer_timeout"]

@@ -3,12 +3,14 @@ extends CharacterBody2D
 signal resources_updated(count : int)
 signal heatlh_changed(current_health : float, max_health: float)
 signal ammo_ratio_changed(new_ratio: float)
+signal boost_ratio_changed(new_ratio: float)
 signal died
 
 @export var resources : int = 0
 
 @onready var health_component = %HealthComponent
 @onready var ammo_storage_component = %AmmoStorageComponent
+@onready var boost_storage_component = %BoostStorageComponent
 
 func remove_all_resources() -> int:
 	var return_value := resources
@@ -30,6 +32,9 @@ func heal(amount : float) -> void:
 func add_ammo(amount : float) -> void:
 	ammo_storage_component.add(amount)
 
+func add_fuel(amount : float) -> void:
+	boost_storage_component.add(amount)
+
 func _ready() -> void:
 	for child in get_children():
 		if child is ComponentBase:
@@ -47,3 +52,6 @@ func _on_health_component_died():
 
 func _on_ammo_storage_component_storage_ratio_changed(new_value):
 	ammo_ratio_changed.emit(new_value)
+
+func _on_boost_storage_component_storage_ratio_changed(new_value):
+	boost_ratio_changed.emit(new_value)

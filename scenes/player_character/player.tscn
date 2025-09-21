@@ -302,8 +302,15 @@ script = ExtResource("7_hb7qo")
 amount = 50.0
 max_amount = 50.0
 
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("animation_player")]
+[node name="BoostStorageComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_hb7qo")
+amount = 6.0
+max_amount = 6.0
+
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("boost_storage", "animation_player")]
 script = ExtResource("2_3lgnh")
+boost_storage = NodePath("../BoostStorageComponent")
 animation_player = NodePath("../AnimationPlayer")
 move_speed = 50.0
 always_moving = true
@@ -332,3 +339,4 @@ libraries = {
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="max_health_changed" from="HealthComponent" to="." method="_on_health_component_max_health_changed"]
 [connection signal="storage_ratio_changed" from="AmmoStorageComponent" to="." method="_on_ammo_storage_component_storage_ratio_changed"]
+[connection signal="storage_ratio_changed" from="BoostStorageComponent" to="." method="_on_boost_storage_component_storage_ratio_changed"]
