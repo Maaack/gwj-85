@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://k4l4k4ev6t7x"]
+[gd_scene load_steps=38 format=3 uid="uid://k4l4k4ev6t7x"]
 
 [ext_resource type="Script" uid="uid://de2is8p30174w" path="res://scenes/player_character/player.gd" id="1_0sa2d"]
 [ext_resource type="Script" uid="uid://cl2lgwr2etn22" path="res://scenes/player_character/player_controller.gd" id="2_3lgnh"]
@@ -9,6 +9,17 @@
 [ext_resource type="Script" uid="uid://b4p8gwxddkx75" path="res://scenes/components/unit_storage_component.gd" id="7_hb7qo"]
 [ext_resource type="AudioStream" uid="uid://dq3sjc6vw4xfc" path="res://assets/sfx/player_shoot.wav" id="8_2pkhx"]
 [ext_resource type="AudioStream" uid="uid://un8qw3iwwp5v" path="res://assets/sfx/no_ammo.wav" id="8_jufd7"]
+[ext_resource type="AudioStream" uid="uid://bwks0eafemejd" path="res://assets/sfx/ammo_up_1.wav" id="10_r25xv"]
+[ext_resource type="AudioStream" uid="uid://qx1ax6cp7cb7" path="res://assets/sfx/ammo_up_2.wav" id="11_xd6if"]
+[ext_resource type="AudioStream" uid="uid://c242mvxsucx4r" path="res://assets/sfx/health_up.wav" id="12_xd6if"]
+[ext_resource type="AudioStream" uid="uid://trqk0c1phu1q" path="res://assets/sfx/fuel_up_1.wav" id="13_1kf6u"]
+[ext_resource type="AudioStream" uid="uid://d2wc21mpvg045" path="res://assets/sfx/fuel_up_2.wav" id="14_uw3sr"]
+[ext_resource type="AudioStream" uid="uid://bouihblglegjt" path="res://assets/sfx/resource_up_1.wav" id="15_bwm1c"]
+[ext_resource type="AudioStream" uid="uid://bd2tjei14b8sw" path="res://assets/sfx/resource_up_2.wav" id="16_l7aj4"]
+[ext_resource type="AudioStream" uid="uid://d1j03aqdblbhi" path="res://assets/sfx/resource_give.wav" id="17_sphax"]
+[ext_resource type="AudioStream" uid="uid://cji6u2qo4skrd" path="res://assets/sfx/resource_give_2.wav" id="18_alj8t"]
+[ext_resource type="AudioStream" uid="uid://b0p6a6iyk0me2" path="res://assets/sfx/hit_hurt.wav" id="19_moxmk"]
+[ext_resource type="AudioStream" uid="uid://23r6gjx2k6ih" path="res://assets/sfx/hit_hurt_2.wav" id="20_e8om5"]
 
 [sub_resource type="Animation" id="Animation_1kf6u"]
 resource_name = "E"
@@ -287,6 +298,41 @@ random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("8_2pkhx")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8n81l"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("10_r25xv")
+stream_1/stream = ExtResource("11_xd6if")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1kf6u"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("12_xd6if")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bwm1c"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("13_1kf6u")
+stream_1/stream = ExtResource("14_uw3sr")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sphax"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("15_bwm1c")
+stream_1/stream = ExtResource("16_l7aj4")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_moxmk"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("17_sphax")
+stream_1/stream = ExtResource("18_alj8t")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jcrif"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("19_moxmk")
+stream_1/stream = ExtResource("20_e8om5")
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 29
 script = ExtResource("1_0sa2d")
@@ -327,11 +373,10 @@ animation_player = NodePath("../AnimationPlayer")
 move_speed = 30.0
 always_moving = true
 
-[node name="FireController" type="Node" parent="." node_paths=PackedStringArray("player_controller", "ammo_storage", "fire_sound_player", "no_ammo_sound_player")]
+[node name="FireController" type="Node" parent="." node_paths=PackedStringArray("player_controller", "ammo_storage", "no_ammo_sound_player")]
 script = ExtResource("3_y1h0s")
 player_controller = NodePath("../PlayerController")
 ammo_storage = NodePath("../AmmoStorageComponent")
-fire_sound_player = NodePath("../FireStreamPlayer")
 no_ammo_sound_player = NodePath("../NoAmmoStreamPlayer")
 bullet_scene = ExtResource("4_ev6t3")
 spawn_offset = Vector2(5, 0)
@@ -355,6 +400,41 @@ bus = &"SFX"
 
 [node name="FireStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_jufd7")
+max_polyphony = 4
+bus = &"SFX"
+
+[node name="AmmoUpStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_8n81l")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="HealthUpStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_1kf6u")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="FuelUpStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_bwm1c")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="ResourceUpStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_sphax")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="ResourceGiveStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_moxmk")
+bus = &"SFX"
+
+[node name="DamageStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_jcrif")
 max_polyphony = 4
 bus = &"SFX"
 

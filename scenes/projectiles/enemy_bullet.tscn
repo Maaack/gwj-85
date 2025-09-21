@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://op0jpekss5tj"]
+[gd_scene load_steps=5 format=3 uid="uid://op0jpekss5tj"]
 
 [ext_resource type="PackedScene" uid="uid://dy4jpp8ac8ixh" path="res://scenes/projectiles/bullet.tscn" id="1_ssc7s"]
+[ext_resource type="AudioStream" uid="uid://ctp25ii5dqkgl" path="res://assets/sfx/enemy_shoot_1.wav" id="2_xg0ik"]
+[ext_resource type="AudioStream" uid="uid://dvruekf3a00td" path="res://assets/sfx/enemy_shoot_2.wav" id="3_2g2tn"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_littb"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("2_xg0ik")
+stream_1/stream = ExtResource("3_2g2tn")
 
 [node name="Bullet" instance=ExtResource("1_ssc7s")]
 collision_mask = 19
@@ -8,3 +16,7 @@ collision_mask = 19
 [node name="Sprite2D" parent="." index="0"]
 modulate = Color(1, 0.41568628, 0.41960785, 1)
 frame = 1
+
+[node name="AudioStreamPlayer2D" parent="." index="3"]
+stream = SubResource("AudioStreamRandomizer_littb")
+volume_db = -15.0

@@ -1,7 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://vxxb6lphkmwe"]
+[gd_scene load_steps=9 format=3 uid="uid://vxxb6lphkmwe"]
 
 [ext_resource type="Script" uid="uid://bv2ax66ik1pdm" path="res://scenes/stations/part_explosion.gd" id="1_lgrsa"]
 [ext_resource type="Texture2D" uid="uid://cp215u8bid3y4" path="res://assets/sprites/white-explosion.png" id="2_0828h"]
+[ext_resource type="AudioStream" uid="uid://ciri2moa0dtd3" path="res://assets/sfx/explosion_short_1.wav" id="3_2cko6"]
+[ext_resource type="AudioStream" uid="uid://dlvqjpgoifxo" path="res://assets/sfx/explosion_short_3.wav" id="4_0i5lk"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_saqqt"]
+random_pitch = 1.2
+streams_count = 2
+stream_0/stream = ExtResource("3_2cko6")
+stream_1/stream = ExtResource("4_0i5lk")
 
 [sub_resource type="Animation" id="Animation_x52uw"]
 resource_name = "AUTOPLAY"
@@ -100,6 +108,10 @@ hframes = 2
 vframes = 2
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_saqqt")
+autoplay = true
+max_distance = 1000.0
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

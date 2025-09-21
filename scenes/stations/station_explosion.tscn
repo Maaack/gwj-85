@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://3a687tnw5rqj"]
+[gd_scene load_steps=11 format=3 uid="uid://3a687tnw5rqj"]
 
 [ext_resource type="Texture2D" uid="uid://cp215u8bid3y4" path="res://assets/sprites/white-explosion.png" id="1_dwa74"]
 [ext_resource type="Script" uid="uid://by5oh01uic4lt" path="res://scenes/stations/station_explosion.gd" id="1_vwa6v"]
+[ext_resource type="AudioStream" uid="uid://bldrtkb81dgyo" path="res://assets/sfx/explosion_short_2.wav" id="3_u8270"]
+[ext_resource type="AudioStream" uid="uid://cxh8eqpceblu0" path="res://assets/sfx/explosion_long_3.wav" id="4_kes6a"]
+[ext_resource type="AudioStream" uid="uid://bs7hl4byyvt01" path="res://assets/sfx/explosion_long_1.wav" id="5_kes6a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwa6v"]
 
@@ -389,10 +392,16 @@ vframes = 2
 frame = 3
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_u8270")
+bus = &"SFX"
 
 [node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_kes6a")
+bus = &"SFX"
 
 [node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_kes6a")
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

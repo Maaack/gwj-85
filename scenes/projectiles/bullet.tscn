@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dy4jpp8ac8ixh"]
+[gd_scene load_steps=6 format=3 uid="uid://dy4jpp8ac8ixh"]
 
 [ext_resource type="Script" uid="uid://b4yeohtp70dj5" path="res://scenes/projectiles/bullet.gd" id="1_5f1na"]
 [ext_resource type="Texture2D" uid="uid://0aoeqxw4ciah" path="res://assets/sprites/white-projectiles.png" id="2_48g2p"]
+[ext_resource type="AudioStream" uid="uid://dq3sjc6vw4xfc" path="res://assets/sfx/player_shoot.wav" id="3_k5ji7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5f1na"]
 radius = 2.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i2bxc"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("3_k5ji7")
 
 [node name="Bullet" type="CharacterBody2D"]
 collision_layer = 0
@@ -25,5 +31,11 @@ shape = SubResource("CircleShape2D_5f1na")
 wait_time = 2.5
 one_shot = true
 autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_i2bxc")
+autoplay = true
+max_distance = 600.0
+bus = &"SFX"
 
 [connection signal="timeout" from="DecayTimer" to="." method="_on_decay_timer_timeout"]

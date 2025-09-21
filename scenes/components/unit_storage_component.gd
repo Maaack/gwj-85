@@ -26,7 +26,7 @@ signal storage_ratio_changed(new_value : float)
 func get_capacity():
 	return max_amount - amount
 
-func at_capacity():
+func is_full() -> bool:
 	return amount >= max_amount
 
 func add(delta : float):

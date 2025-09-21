@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmokh4lufqxx6"]
+[gd_scene load_steps=6 format=3 uid="uid://dmokh4lufqxx6"]
 
 [ext_resource type="Script" uid="uid://yr0cxttgfal" path="res://scenes/projectiles/armor.gd" id="1_m8aad"]
 [ext_resource type="Texture2D" uid="uid://0aoeqxw4ciah" path="res://assets/sprites/white-projectiles.png" id="2_m8aad"]
+[ext_resource type="AudioStream" uid="uid://cjmx3vh5q3o6u" path="res://assets/sfx/station_shoot_power_up.wav" id="3_wmk01"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8aad"]
 radius = 5.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1x5ms"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("3_wmk01")
 
 [node name="Armor" type="CharacterBody2D"]
 modulate = Color(0.24705882, 1, 0.32156864, 1)
@@ -26,5 +32,11 @@ shape = SubResource("CircleShape2D_m8aad")
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_1x5ms")
+autoplay = true
+max_distance = 600.0
+bus = &"SFX"
 
 [connection signal="timeout" from="DecayTimer" to="." method="_on_decay_timer_timeout"]

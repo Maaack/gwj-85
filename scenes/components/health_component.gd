@@ -26,6 +26,9 @@ var health : float :
 		if not dead and health == 0:
 			_die()
 
+func is_full() -> bool:
+	return health >= max_health
+
 func _die():
 	if dead:
 		return
