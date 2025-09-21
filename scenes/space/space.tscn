@@ -1,7 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dihrvlelgw1hq"]
+[gd_scene load_steps=21 format=3 uid="uid://dihrvlelgw1hq"]
 
 [ext_resource type="Script" uid="uid://06q0y3pvo6ae" path="res://scenes/space/space.gd" id="1_718x5"]
+[ext_resource type="Texture2D" uid="uid://dvhj5xbyj1uqj" path="res://assets/sprites/background-layer-2.png" id="2_5w1rd"]
+[ext_resource type="Texture2D" uid="uid://b2ggrv51nq0am" path="res://assets/sprites/background-2x2.png" id="2_hbnr3"]
 [ext_resource type="PackedScene" uid="uid://k4l4k4ev6t7x" path="res://scenes/player_character/player.tscn" id="2_x217o"]
+[ext_resource type="Texture2D" uid="uid://syf2a0v0we6s" path="res://assets/sprites/background-layer-3.png" id="2_xn06p"]
 [ext_resource type="PackedScene" uid="uid://dmokh4lufqxx6" path="res://scenes/projectiles/armor.tscn" id="3_n6hgd"]
 [ext_resource type="PackedScene" uid="uid://blmqu1s4cnie5" path="res://scenes/stations/station.tscn" id="3_x217o"]
 [ext_resource type="PackedScene" uid="uid://ce1mhl8pp1fe7" path="res://scenes/projectiles/ammo.tscn" id="4_wfdyj"]
@@ -15,8 +18,89 @@
 [ext_resource type="PackedScene" uid="uid://p6u1aj0axvkr" path="res://scenes/game_scene/tutorials/tutorial_2.tscn" id="13_hbnr3"]
 [ext_resource type="PackedScene" uid="uid://dak1vc4mccwfy" path="res://scenes/game_scene/tutorials/tutorial_3.tscn" id="14_5w1rd"]
 
+[sub_resource type="Animation" id="Animation_hbnr3"]
+resource_name = "AUTOPLAY"
+length = 8.0
+loop_mode = 1
+step = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parallax2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_5w1rd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parallax2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xn06p"]
+_data = {
+&"AUTOPLAY": SubResource("Animation_hbnr3"),
+&"RESET": SubResource("Animation_5w1rd")
+}
+
 [node name="Space" type="Node"]
 script = ExtResource("1_718x5")
+
+[node name="Parallax2D3" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.125, 0.125)
+repeat_size = Vector2(512, 512)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D3"]
+modulate = Color(1, 1, 1, 0.24705882)
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("2_xn06p")
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.25, 0.25)
+repeat_size = Vector2(512, 512)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D2"]
+modulate = Color(1, 1, 1, 0.49803922)
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("2_5w1rd")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+texture_repeat = 2
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(512, 512)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("2_hbnr3")
+hframes = 2
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Parallax2D"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_xn06p")
+}
+autoplay = "AUTOPLAY"
 
 [node name="Station" parent="." instance=ExtResource("3_x217o")]
 modulate = Color(0.5158667, 0.5158667, 0.5158666, 1)
