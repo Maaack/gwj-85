@@ -3,13 +3,7 @@
 [Marek Belski](https://maaack.itch.io/)  
 
 ## Sourced
-### Asset Type
-#### Use Case
-Author: [Name]()  
-Source: [Domain : webpage.html]()  
-License: [License]()
-
-### Godot Wild Jam Logos
+#### Godot Wild Jam Logos
 Author: [Dawk](https://coreyaroberts.com/)  
 Source: [godotwildjam.com](https://godotwildjam.com/branding/)  
 License: Copyrighted
@@ -38,7 +32,7 @@ Author: [Eric Fredricksen](http://fredricksen.net/)
 Source: [github: jsfxr](https://github.com/chr15m/jsfxr)  
 License: [Unlicense license](https://github.com/chr15m/jsfxr?tab=Unlicense-1-ov-file#readme)  
 
-### Piskel
+#### Piskel
 Author: [Julian Descottes](https://github.com/juliandescottes)  
 Source: [piskelapp.com](https://www.piskelapp.com/)  
 License: [Apache License 2.0](https://github.com/piskelapp/piskel/blob/master/LICENSE)  
