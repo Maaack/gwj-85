@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dihrvlelgw1hq"]
+[gd_scene load_steps=20 format=3 uid="uid://dihrvlelgw1hq"]
 
 [ext_resource type="Script" uid="uid://06q0y3pvo6ae" path="res://scenes/space/space.gd" id="1_718x5"]
 [ext_resource type="Texture2D" uid="uid://dvhj5xbyj1uqj" path="res://assets/sprites/background-layer-2.png" id="2_5w1rd"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dmokh4lufqxx6" path="res://scenes/projectiles/armor.tscn" id="3_n6hgd"]
 [ext_resource type="PackedScene" uid="uid://blmqu1s4cnie5" path="res://scenes/stations/station.tscn" id="3_x217o"]
 [ext_resource type="PackedScene" uid="uid://ce1mhl8pp1fe7" path="res://scenes/projectiles/ammo.tscn" id="4_wfdyj"]
-[ext_resource type="PackedScene" uid="uid://b0bfytfwc4v4t" path="res://scenes/asteroids/asteroid.tscn" id="5_0a2q3"]
 [ext_resource type="PackedScene" uid="uid://r87ochue4usc" path="res://scenes/projectiles/fuel.tscn" id="5_5v2dy"]
 [ext_resource type="PackedScene" uid="uid://d5pko5l0mapi" path="res://scenes/space/asteroid_spawner.tscn" id="6_n6hgd"]
 [ext_resource type="PackedScene" uid="uid://dy4jpp8ac8ixh" path="res://scenes/projectiles/bullet.tscn" id="6_pcxls"]
@@ -242,22 +241,18 @@ vertical_alignment = 1
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("6_n6hgd")]
 position = Vector2(350, 0)
-spawn_scene = ExtResource("5_0a2q3")
 spawn_range = 200.0
 
 [node name="AsteroidSpawner2" parent="." instance=ExtResource("6_n6hgd")]
 position = Vector2(-350, 0)
-spawn_scene = ExtResource("5_0a2q3")
 spawn_range = 200.0
 
 [node name="AsteroidSpawner3" parent="." instance=ExtResource("6_n6hgd")]
 position = Vector2(0, -350)
-spawn_scene = ExtResource("5_0a2q3")
 spawn_range = 200.0
 
 [node name="AsteroidSpawner4" parent="." instance=ExtResource("6_n6hgd")]
 position = Vector2(0, 350)
-spawn_scene = ExtResource("5_0a2q3")
 spawn_range = 200.0
 
 [node name="GiveEnemiesResourceTimer" type="Timer" parent="."]

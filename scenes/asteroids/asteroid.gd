@@ -13,6 +13,7 @@ extends RigidBody2D
 @onready var collision_shape_2d = %CollisionShape2D
 
 var destroyed := false
+var spawner : Node
 
 func damage(_amount : int = 1):
 	if destroyed: return
@@ -24,12 +25,14 @@ func damage(_amount : int = 1):
 			asteroid_instance.rotation = randf_range(-PI, PI)
 			asteroid_instance.global_position = global_position + (Vector2.from_angle(direction) * 4)
 			asteroid_instance.linear_velocity = spawn_speed * Vector2.from_angle(direction)
+			asteroid_instance.spawner = spawner
 			GameEvents.object_spawned.emit(asteroid_instance)
 			var explosion_instance : Node2D = explosion_scene.instantiate()
 			explosion_instance.global_position = global_position
 			GameEvents.object_spawned.emit(explosion_instance)
 	else:
 		var resource_instance : Node2D = resource_scene.instantiate()
+		resource_instance.spawner = spawner
 		resource_instance.global_position = global_position
 		GameEvents.object_spawned.emit(resource_instance)
 	destroyed = true

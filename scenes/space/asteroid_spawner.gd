@@ -14,6 +14,7 @@ func _spawn_instance() -> Node2D:
 	var random_angle := randf_range(-PI, PI)
 	var random_distance := randf() * spawn_range
 	spawn_instance.position = Vector2.from_angle(random_angle) * random_distance + position
+	spawn_instance.spawner = self
 	current_resources += resource_per_spawn
 	object_spawned.emit(spawn_instance)
 	GameEvents.object_spawned.emit(spawn_instance)
@@ -23,7 +24,8 @@ func _check_resources() -> void:
 	while current_resources < min_resources:
 		_spawn_instance()
 
-func _on_resource_collected() -> void:
+func _on_resource_collected(spawner : Node2D) -> void:
+	if spawner != self : return
 	current_resources -= 1
 	_check_resources()
 
