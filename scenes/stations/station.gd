@@ -40,6 +40,8 @@ enum PartType {
 @export var projectile_scenes : Array[PackedScene]
 @export var asteroid_projectile_scenes : Array[PackedScene]
 @export_range(0, 1, 0.001) var resource_drop_chance : float = 0.125
+@export_range(0, 16, 0.01, "or_greater") var resource_drop_range : float = 4.0
+
 
 @onready var astar = AStar2D.new()
 @onready var station_parts : TileMapLayer = %StationParts
@@ -276,7 +278,10 @@ func _destroy_cell(tile_id: Vector2i) -> void:
 	if randf() < resource_drop_chance:
 		var resource_instance : Node2D = resource_scene.instantiate()
 		resource_instance.spawner = self
-		resource_instance.global_position = global_position + Vector2(tile_id * cell_size)
+		var resource_spawn_position = global_position
+		resource_spawn_position += Vector2(tile_id * cell_size)
+		resource_spawn_position += Vector2.from_angle(randf_range(-PI, PI)) * resource_drop_range
+		resource_instance.global_position = resource_spawn_position
 		GameEvents.object_spawned.emit(resource_instance)
 	_destroy_neighboring_tiles(tile_id)
 	if point_id_position_map.is_empty() and not is_destroyed:
