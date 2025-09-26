@@ -23,11 +23,12 @@ func damage(_amount : int = 1):
 			var direction = randf_range(-PI, PI)
 			asteroid_instance.game_mass -= 1
 			asteroid_instance.rotation = randf_range(-PI, PI)
-			asteroid_instance.global_position = global_position + (Vector2.from_angle(direction) * 4)
+			asteroid_instance.global_position = global_position + (Vector2.from_angle(direction) * collider_radius/4)
 			asteroid_instance.linear_velocity = spawn_speed * Vector2.from_angle(direction)
 			asteroid_instance.spawner = spawner
 			GameEvents.object_spawned.emit(asteroid_instance)
 			var explosion_instance : Node2D = explosion_scene.instantiate()
+			explosion_instance.scale = sprite_2d.scale
 			explosion_instance.global_position = global_position
 			GameEvents.object_spawned.emit(explosion_instance)
 	else:
