@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dihrvlelgw1hq"]
+[gd_scene load_steps=21 format=3 uid="uid://dihrvlelgw1hq"]
 
 [ext_resource type="Script" uid="uid://06q0y3pvo6ae" path="res://scenes/space/space.gd" id="1_718x5"]
 [ext_resource type="Texture2D" uid="uid://dvhj5xbyj1uqj" path="res://assets/sprites/background-layer-2.png" id="2_5w1rd"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://d5pko5l0mapi" path="res://scenes/space/asteroid_spawner.tscn" id="6_n6hgd"]
 [ext_resource type="PackedScene" uid="uid://dy4jpp8ac8ixh" path="res://scenes/projectiles/bullet.tscn" id="6_pcxls"]
 [ext_resource type="PackedScene" uid="uid://dicjk5qi0cyja" path="res://scenes/space/borders.tscn" id="8_npeeh"]
+[ext_resource type="PackedScene" uid="uid://dtyce8j1uq2fs" path="res://scenes/stations/v_station.tscn" id="10_xn06p"]
 [ext_resource type="Script" uid="uid://cixoduw30dw26" path="res://scenes/game_scene/tutorial_manager.gd" id="11_vho6q"]
 [ext_resource type="PackedScene" uid="uid://d4fpfp685nnh6" path="res://scenes/game_scene/tutorials/tutorial_1.tscn" id="12_pp5mj"]
 [ext_resource type="PackedScene" uid="uid://p6u1aj0axvkr" path="res://scenes/game_scene/tutorials/tutorial_2.tscn" id="13_hbnr3"]
@@ -107,7 +108,7 @@ fire_delay = 1.0
 projectile_scenes = Array[PackedScene]([ExtResource("3_n6hgd"), ExtResource("4_wfdyj"), ExtResource("5_5v2dy")])
 asteroid_projectile_scenes = Array[PackedScene]([ExtResource("6_pcxls")])
 
-[node name="Station3" parent="." instance=ExtResource("3_x217o")]
+[node name="Station3" parent="." instance=ExtResource("10_xn06p")]
 modulate = Color(0.78944016, 0.3929266, 0, 1)
 position = Vector2(-360, 360)
 enemy = true
@@ -122,7 +123,7 @@ modulate = Color(9.62615e-08, 0.58014625, 0.67069197, 1)
 position = Vector2(-360, -360)
 enemy = true
 
-[node name="Station4" parent="." instance=ExtResource("3_x217o")]
+[node name="Station4" parent="." instance=ExtResource("10_xn06p")]
 modulate = Color(0.73153114, 0.13283357, 0.99999994, 1)
 position = Vector2(360, -360)
 enemy = true

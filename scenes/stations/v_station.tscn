@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=4 uid="uid://dtyce8j1uq2fs"]
+
+[ext_resource type="PackedScene" uid="uid://blmqu1s4cnie5" path="res://scenes/stations/station.tscn" id="1_mti1h"]
+
+[node name="VStation" instance=ExtResource("1_mti1h")]
+
+[node name="StationParts" parent="." index="0"]
+tile_map_data = PackedByteArray("AAAAAAAAAQADAAMAAFABAP//AQADAAEAAAABAAEAAQADAAEAAAAAAAEAAQACAAIAAAD//wEAAQABAAIAAAD/////AQABAAIAAAAAAP//AQAAAAMAAAA=")
