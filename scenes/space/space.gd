@@ -1,6 +1,7 @@
 extends Node
 
-@export var station_starting_size : int = 128
+@export var starting_size_limit : int = 9
+@export var starting_expand_size : int = 180
 
 @onready var health_bar = %HealthBar
 @onready var ammo_progress_bar = %AmmoProgressBar
@@ -24,13 +25,14 @@ func _ready() -> void:
 	GameEvents.object_spawned.connect(_on_object_spawned)
 	for child in get_children():
 		if child is SpaceStation2D:
-			child.resources += station_starting_size
-			child.expand_station(station_starting_size)
+			child.size_limit = starting_size_limit
+			child.resources += starting_expand_size
+			child.expand_station(starting_expand_size)
 			child.size_limit = 0
 			var new_label = station_size_label.duplicate()
 			new_label.show()
 			new_label.modulate = child.modulate
-			new_label.text = "%d" % (station_starting_size + 7)
+			new_label.text = "%d" % (starting_expand_size + 7)
 			child.size_changed.connect(func(new_size: int) : new_label.text = "%d" % new_size)
 			station_size_label.add_sibling.call_deferred(new_label)
 			if player_station == null:
