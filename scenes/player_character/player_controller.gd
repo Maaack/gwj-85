@@ -12,6 +12,9 @@ extends Node
 @export var move_right_action : StringName = &"move_right"
 @export var boost_action : StringName = &"boost"
 @export var boost_mod : float = 2.0
+@export var boost_sound_player : AudioStreamPlayer
+@export var no_boost_sound_player : AudioStreamPlayer
+
 
 @export var collision_damage : float = 5
 @export var collision_lock_delay : float = 0.25
@@ -58,6 +61,15 @@ func _process(delta) -> void:
 			if boost_storage.amount > 0.0:
 				current_boost_mod = boost_mod
 				boost_storage.subtract(delta)
+				if not boost_sound_player.playing:
+					boost_sound_player.play()
+			else:
+				if boost_sound_player.playing:
+					boost_sound_player.stop()
+				if not no_boost_sound_player.playing:
+					no_boost_sound_player.play()
+		else:
+			boost_sound_player.stop()
 		character_body.velocity = move_speed * facing_vector * current_boost_mod
 	if character_body.move_and_slide():
 		if control_locked: return

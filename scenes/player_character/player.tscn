@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://dy4jpp8ac8ixh" path="res://scenes/projectiles/bullet.tscn" id="4_ev6t3"]
 [ext_resource type="Script" uid="uid://c8lbeuefufhh2" path="res://scenes/components/health_component.gd" id="6_0sa2d"]
 [ext_resource type="Script" uid="uid://b4p8gwxddkx75" path="res://scenes/components/unit_storage_component.gd" id="7_hb7qo"]
-[ext_resource type="AudioStream" uid="uid://dq3sjc6vw4xfc" path="res://assets/sfx/player_shoot.wav" id="8_2pkhx"]
-[ext_resource type="AudioStream" uid="uid://un8qw3iwwp5v" path="res://assets/sfx/no_ammo.wav" id="8_jufd7"]
+[ext_resource type="AudioStream" uid="uid://un8qw3iwwp5v" path="res://assets/sfx/no_boost.wav" id="8_jufd7"]
+[ext_resource type="AudioStream" uid="uid://da4slgxkixk64" path="res://assets/sfx/no_ammo.wav" id="9_e8om5"]
+[ext_resource type="AudioStream" uid="uid://cayri20isdpoq" path="res://assets/sfx/engine_tone.ogg" id="10_e8om5"]
 [ext_resource type="AudioStream" uid="uid://bwks0eafemejd" path="res://assets/sfx/ammo_up_1.wav" id="10_r25xv"]
 [ext_resource type="AudioStream" uid="uid://qx1ax6cp7cb7" path="res://assets/sfx/ammo_up_2.wav" id="11_xd6if"]
 [ext_resource type="AudioStream" uid="uid://c242mvxsucx4r" path="res://assets/sfx/health_up.wav" id="12_xd6if"]
@@ -293,11 +294,6 @@ _data = {
 &"W": SubResource("Animation_j2iwx")
 }
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jufd7"]
-random_pitch = 1.1
-streams_count = 1
-stream_0/stream = ExtResource("8_2pkhx")
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8n81l"]
 random_pitch = 1.1
 streams_count = 2
@@ -366,12 +362,14 @@ unique_name_in_owner = true
 script = ExtResource("7_hb7qo")
 max_amount = 80.0
 
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("boost_storage", "animation_player")]
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("boost_storage", "animation_player", "boost_sound_player", "no_boost_sound_player")]
 script = ExtResource("2_3lgnh")
 boost_storage = NodePath("../BoostStorageComponent")
 animation_player = NodePath("../AnimationPlayer")
 move_speed = 30.0
 always_moving = true
+boost_sound_player = NodePath("../BoostStreamPlayer")
+no_boost_sound_player = NodePath("../NoBoostStreamPlayer")
 
 [node name="FireController" type="Node" parent="." node_paths=PackedStringArray("player_controller", "ammo_storage", "no_ammo_sound_player")]
 script = ExtResource("3_y1h0s")
@@ -395,11 +393,19 @@ libraries = {
 }
 
 [node name="NoAmmoStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_e8om5")
+bus = &"SFX"
+
+[node name="NoBoostStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_jufd7")
 bus = &"SFX"
 
+[node name="BoostStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_e8om5")
+volume_db = -8.0
+bus = &"SFX"
+
 [node name="FireStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_jufd7")
 max_polyphony = 4
 bus = &"SFX"
 
