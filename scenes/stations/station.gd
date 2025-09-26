@@ -274,15 +274,17 @@ func _destroy_cell(tile_id: Vector2i) -> void:
 	else:
 		explosion_instance = part_explosion_scene.instantiate()
 		explosion_instance.global_position = global_position + Vector2(tile_id * cell_size)
+		if randf() < resource_drop_chance:
+			var resource_instance : Node2D = resource_scene.instantiate()
+			resource_instance.spawner = self
+			var resource_spawn_position = global_position
+			resource_spawn_position += Vector2(tile_id * cell_size)
+			resource_spawn_position += Vector2.from_angle(randf_range(-PI, PI)) * resource_drop_range
+			resource_instance.global_position = resource_spawn_position
+			GameEvents.object_spawned.emit(resource_instance)
 	GameEvents.object_spawned.emit(explosion_instance)
-	if randf() < resource_drop_chance:
-		var resource_instance : Node2D = resource_scene.instantiate()
-		resource_instance.spawner = self
-		var resource_spawn_position = global_position
-		resource_spawn_position += Vector2(tile_id * cell_size)
-		resource_spawn_position += Vector2.from_angle(randf_range(-PI, PI)) * resource_drop_range
-		resource_instance.global_position = resource_spawn_position
-		GameEvents.object_spawned.emit(resource_instance)
+	if tile_id == Vector2i.ZERO:
+		await get_tree().create_timer(0.5, false).timeout
 	_destroy_neighboring_tiles(tile_id)
 	if point_id_position_map.is_empty() and not is_destroyed:
 		is_destroyed = true
