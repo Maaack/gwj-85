@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://blmqu1s4cnie5"]
+[gd_scene load_steps=16 format=4 uid="uid://blmqu1s4cnie5"]
 
 [ext_resource type="Script" uid="uid://c24inooqjqpcu" path="res://scenes/stations/station.gd" id="1_p2oen"]
 [ext_resource type="PackedScene" uid="uid://op0jpekss5tj" path="res://scenes/projectiles/enemy_bullet.tscn" id="2_fbgwf"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://3a687tnw5rqj" path="res://scenes/stations/station_explosion.tscn" id="2_ynfrt"]
 [ext_resource type="PackedScene" uid="uid://vxxb6lphkmwe" path="res://scenes/stations/part_explosion.tscn" id="3_2xlx3"]
 [ext_resource type="Script" uid="uid://1fre8nchd36n" path="res://scenes/stations/station_parts.gd" id="3_3ic5c"]
+[ext_resource type="PackedScene" uid="uid://l0fvn0dl80xb" path="res://scenes/objects/resource.tscn" id="4_u1dk1"]
 [ext_resource type="AudioStream" uid="uid://dggdqaehe1nse" path="res://assets/sfx/hit_hurt_station.wav" id="7_u01ck"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ic5c"]
@@ -162,11 +163,13 @@ stream_0/stream = ExtResource("7_u01ck")
 script = ExtResource("1_p2oen")
 station_explosion_scene = ExtResource("2_ynfrt")
 part_explosion_scene = ExtResource("3_2xlx3")
+resource_scene = ExtResource("4_u1dk1")
 health = 5.0
 part_fire_delay = 2.0
 projectile_velocity = 45.0
 projectile_scenes = Array[PackedScene]([ExtResource("2_fbgwf")])
 asteroid_projectile_scenes = Array[PackedScene]([ExtResource("2_fbgwf")])
+resource_drop_chance = 0.063
 
 [node name="StationParts" type="TileMapLayer" parent="."]
 unique_name_in_owner = true

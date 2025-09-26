@@ -3,17 +3,17 @@ extends RigidBody2D
 
 
 @export var explosion_scene : PackedScene
+@export var resource_scene : PackedScene
 @export var game_mass : int = 4
 @export var pieces : int = 2
 @export var spawn_speed : float = 25.0
 @export var collider_radius : float = 32.0
-@export var resource_scene : PackedScene
 
 @onready var sprite_2d = %Sprite2D
 @onready var collision_shape_2d = %CollisionShape2D
 
 var destroyed := false
-var spawner : Node
+var spawner : Node2D
 
 func damage(_amount : int = 1):
 	if destroyed: return

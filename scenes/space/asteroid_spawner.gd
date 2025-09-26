@@ -24,7 +24,7 @@ func _check_resources() -> void:
 	while current_resources < min_resources:
 		_spawn_instance()
 
-func _on_resource_collected(spawner : Node2D) -> void:
+func _on_resource_collected(spawner) -> void:
 	if spawner != self : return
 	current_resources -= 1
 	_check_resources()
