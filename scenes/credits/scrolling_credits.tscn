@@ -7,18 +7,11 @@
 script = ExtResource("2_cxj1u")
 
 [node name="CreditsLabel" parent="ScrollContainer/VBoxContainer" index="1"]
-custom_minimum_size = Vector2(1240, 0)
 text = "[center][font_size=48]Game By[/font_size]
 [url=https://maaack.itch.io/]Marek Belski[/url]  
 
 [font_size=48]Sourced[/font_size]
-[font_size=32]Asset Type[/font_size]
-[font_size=24]Use Case[/font_size]
-Author: [url=]Name[/url]  
-Source: [url=]Domain : webpage.html[/url]  
-License: [url=]License[/url]
-
-[font_size=32]Godot Wild Jam Logos[/font_size]
+[font_size=24]Godot Wild Jam Logos[/font_size]
 Author: [url=https://coreyaroberts.com/]Dawk[/url]  
 Source: [url=https://godotwildjam.com/branding/]godotwildjam.com[/url]  
 License: Copyrighted
@@ -47,7 +40,7 @@ Author: [url=http://fredricksen.net/]Eric Fredricksen[/url]
 Source: [url=https://github.com/chr15m/jsfxr]github: jsfxr[/url]  
 License: [url=https://github.com/chr15m/jsfxr?tab=Unlicense-1-ov-file#readme]Unlicense license[/url]  
 
-[font_size=32]Piskel[/font_size]
+[font_size=24]Piskel[/font_size]
 Author: [url=https://github.com/juliandescottes]Julian Descottes[/url]  
 Source: [url=https://www.piskelapp.com/]piskelapp.com[/url]  
 License: [url=https://github.com/piskelapp/piskel/blob/master/LICENSE]Apache License 2.0[/url]  
