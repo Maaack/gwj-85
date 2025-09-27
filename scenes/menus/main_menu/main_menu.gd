@@ -8,6 +8,7 @@ var level_select_scene : Node
 @onready var continue_game_button = %ContinueGameButton
 @onready var level_select_button = %LevelSelectButton
 @onready var level_select_container = %LevelSelectContainer
+@onready var cancel_stream_player = $CancelStreamPlayer
 
 func load_game_scene() -> void:
 	GameState.start_game()
@@ -19,6 +20,12 @@ func new_game() -> void:
 	else:
 		GameState.reset()
 		load_game_scene()
+
+func exit_game() -> void:
+	if cancel_stream_player:
+		cancel_stream_player.play()
+		await cancel_stream_player.finished
+	super.exit_game()
 
 func _add_level_select_if_set() -> void: 
 	if level_select_packed_scene == null: return
