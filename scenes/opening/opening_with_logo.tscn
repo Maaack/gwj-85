@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://tel2pbkehtvr"]
+[gd_scene load_steps=7 format=3 uid="uid://tel2pbkehtvr"]
 
 [ext_resource type="PackedScene" uid="uid://sikc02ddepyt" path="res://addons/maaacks_game_template/base/scenes/opening/opening.tscn" id="1_w60c0"]
 [ext_resource type="Script" uid="uid://cbcff2o6b8xwe" path="res://scenes/opening/opening.gd" id="2_ynkyy"]
 [ext_resource type="Texture2D" uid="uid://blxgvixbnr74f" path="res://assets/images/GWJ-Full-Logo-tag-Orange2.svg" id="3_kt5v3"]
 [ext_resource type="Texture2D" uid="uid://diw37tuycvxdt" path="res://assets/sprites/theme-image.png" id="4_w60c0"]
 [ext_resource type="Texture2D" uid="uid://wwebfvdqpnqb" path="res://assets/sprites/wildcards-image-2.png" id="5_ynkyy"]
+[ext_resource type="AudioStream" uid="uid://sue31hq3kxib" path="res://assets/music/Sci-Fi 8.ogg" id="6_ynkyy"]
 
 [node name="Opening" instance=ExtResource("1_w60c0")]
 script = ExtResource("2_ynkyy")
@@ -13,6 +14,9 @@ images = Array[Texture2D]([ExtResource("3_kt5v3"), ExtResource("4_w60c0"), ExtRe
 fade_in_time = 0.1
 fade_out_time = 0.1
 visible_time = 1.2
+
+[node name="BackgroundMusicPlayer" parent="." index="0"]
+stream = ExtResource("6_ynkyy")
 
 [node name="ImagesContainer" parent="." index="1"]
 theme_override_constants/margin_left = 64

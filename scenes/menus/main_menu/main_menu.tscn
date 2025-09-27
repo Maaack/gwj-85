@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cguwa5x6ublll"]
+[gd_scene load_steps=11 format=3 uid="uid://cguwa5x6ublll"]
 
 [ext_resource type="PackedScene" uid="uid://c6k5nnpbypshi" path="res://addons/maaacks_game_template/base/scenes/menus/main_menu/main_menu.tscn" id="1_peecx"]
 [ext_resource type="Script" uid="uid://cid3o3n422rr" path="res://scenes/menus/main_menu/main_menu.gd" id="2_ub2bi"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dvhj5xbyj1uqj" path="res://assets/sprites/background-layer-2.png" id="6_m0ubd"]
 [ext_resource type="Texture2D" uid="uid://b2ggrv51nq0am" path="res://assets/sprites/background-2x2.png" id="7_627ab"]
 [ext_resource type="PackedScene" uid="uid://cfnjrkkxhmy3i" path="res://scenes/space/dummy_station_spawner.tscn" id="8_m0ubd"]
+[ext_resource type="AudioStream" uid="uid://sue31hq3kxib" path="res://assets/music/Sci-Fi 8.ogg" id="9_7j6ce"]
 [ext_resource type="AudioStream" uid="uid://be8kdbosbl8m3" path="res://assets/sfx/ui_cancel.wav" id="9_627ab"]
 
 [node name="MainMenu" instance=ExtResource("1_peecx")]
@@ -73,6 +74,9 @@ spawn_range = 200.0
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport" index="4"]
 zoom = Vector2(2, 2)
+
+[node name="BackgroundMusicPlayer" parent="." index="2"]
+stream = ExtResource("9_7j6ce")
 
 [node name="VersionLabel" parent="VersionMargin/VersionContainer" index="0"]
 text = "v1.4.0"

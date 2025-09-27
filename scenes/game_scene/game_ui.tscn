@@ -1,14 +1,23 @@
-[gd_scene load_steps=10 format=3 uid="uid://dw78byi4n8rso"]
+[gd_scene load_steps=14 format=3 uid="uid://dw78byi4n8rso"]
 
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://addons/maaacks_game_template/base/scripts/pause_menu_controller.gd" id="1_8qp3c"]
 [ext_resource type="Script" uid="uid://h41kbwsybhik" path="res://scenes/game_scene/game_ui.gd" id="1_y85d6"]
 [ext_resource type="PackedScene" uid="uid://cuhtkkl6cjbmw" path="res://scenes/overlaid_menus/pause_menu.tscn" id="2_bmy5n"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_game_template/base/scenes/music_players/background_music_player.tscn" id="3_7aihr"]
+[ext_resource type="AudioStream" uid="uid://bw73m7qbs4oip" path="res://assets/music/Sci-Fi 1 Loop.ogg" id="5_bmy5n"]
 [ext_resource type="PackedScene" uid="uid://dihrvlelgw1hq" path="res://scenes/space/space.tscn" id="5_v20na"]
 [ext_resource type="PackedScene" uid="uid://ct8t877778ng8" path="res://scenes/overlaid_menus/game_won_menu.tscn" id="6_wr4n6"]
+[ext_resource type="AudioStream" uid="uid://brm4oe3rkqnt1" path="res://assets/music/Sci-Fi 5 Loop.ogg" id="7_3re04"]
+[ext_resource type="AudioStream" uid="uid://bx4nsl4tfdj24" path="res://assets/music/Sci-Fi 6 Loop.ogg" id="7_bmy5n"]
 [ext_resource type="PackedScene" uid="uid://djy8qwdum8ftv" path="res://scenes/overlaid_menus/level_lost_menu.tscn" id="7_ukb12"]
 [ext_resource type="Script" uid="uid://bbpb16olfhm8c" path="res://scenes/game_scene/win_lose_controller.gd" id="9_bqcs8"]
 [ext_resource type="Script" uid="uid://va6etebkiseh" path="res://scenes/game_scene/configurable_sub_viewport.gd" id="11_0v86b"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bqcs8"]
+streams_count = 3
+stream_0/stream = ExtResource("5_bmy5n")
+stream_1/stream = ExtResource("7_3re04")
+stream_2/stream = ExtResource("7_bmy5n")
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -25,6 +34,7 @@ pause_menu_packed = ExtResource("2_bmy5n")
 focused_viewport = NodePath("../ViewportContainer/ConfigurableSubViewport")
 
 [node name="BackgroundMusicPlayer" parent="." instance=ExtResource("3_7aihr")]
+stream = SubResource("AudioStreamRandomizer_bqcs8")
 
 [node name="ViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -52,3 +62,5 @@ main_menu_scene = "uid://csrxdgv14gev8"
 ending_scene = "uid://b6veyt23r4c0b"
 game_won_scene = ExtResource("6_wr4n6")
 game_lost_scene = ExtResource("7_ukb12")
+
+[connection signal="finished" from="BackgroundMusicPlayer" to="BackgroundMusicPlayer" method="play"]
