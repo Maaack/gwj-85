@@ -3,6 +3,11 @@
 [Marek Belski](https://maaack.itch.io/)  
 
 ## Sourced
+#### Music
+Author: [alkakrab](https://alkakrab.itch.io/)  
+Source: [itch.io](https://alkakrab.itch.io/free-sci-fi-game-music-pack)  
+License: Custom Commercial-Free License
+
 #### Godot Wild Jam Logos
 Author: [Dawk](https://coreyaroberts.com/)  
 Source: [godotwildjam.com](https://godotwildjam.com/branding/)  
