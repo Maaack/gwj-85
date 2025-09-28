@@ -1,30 +1,57 @@
-[gd_scene load_steps=2 format=3 uid="uid://dak1vc4mccwfy"]
+[gd_scene load_steps=5 format=3 uid="uid://dak1vc4mccwfy"]
 
 [ext_resource type="PackedScene" uid="uid://wny2d8dvp3ok" path="res://addons/maaacks_game_template/base/scenes/overlaid_menu/overlaid_menu.tscn" id="1_hy5iy"]
+[ext_resource type="Texture2D" uid="uid://q7itioqbr5dx" path="res://assets/images/resource-pickup.png" id="2_s7e8g"]
+[ext_resource type="Texture2D" uid="uid://ci7ydvijpneay" path="res://assets/images/ship.png" id="3_nejw6"]
+[ext_resource type="Texture2D" uid="uid://1waj4g722qwg" path="res://assets/images/resource-dropoff.png" id="4_yykew"]
 
 [node name="Tutorial3" instance=ExtResource("1_hy5iy")]
 process_mode = 3
 pauses_game = true
 
 [node name="MenuPanelContainer" parent="." index="1"]
-offset_left = -206.0
-offset_top = -75.0
-offset_right = 215.0
-offset_bottom = 76.0
+offset_left = -210.5
+offset_top = -128.5
+offset_right = 210.5
+offset_bottom = 128.5
 
 [node name="BoxContainer" parent="MenuPanelContainer/MarginContainer" index="0"]
 theme_override_constants/separation = 16
 
 [node name="TitleLabel" parent="MenuPanelContainer/MarginContainer/BoxContainer/TitleMargin" index="0"]
-text = "Battle"
+text = "Expanding"
 
 [node name="DescriptionMargin" parent="MenuPanelContainer/MarginContainer/BoxContainer" index="1"]
 visible = true
 
 [node name="DescriptionLabel" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin" index="0"]
+visible = false
 text = "[center]Fire at [b]nodes[/b] or [b]centers[/b] of enemy stations to destroy them. Other parts are [i]invulnerable[/i].
 
 Destroying nodes can cause a [i]chain reaction[/i] down the arm to the last junction.
 
 Destroying the center will cause a [i]chain reaction[/i] that destroys the [i]whole station[/i].[/center]"
 fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin" index="1"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer" index="0"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="ResourcePickup2" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer2" index="0"]
+layout_mode = 2
+texture = ExtResource("2_s7e8g")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer2" index="1"]
+layout_mode = 2
+texture = ExtResource("3_nejw6")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer2" index="2"]
+layout_mode = 2
+texture = ExtResource("4_yykew")
+stretch_mode = 3

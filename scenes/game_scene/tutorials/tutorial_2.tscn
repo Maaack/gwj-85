@@ -1,27 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://p6u1aj0axvkr"]
+[gd_scene load_steps=7 format=3 uid="uid://p6u1aj0axvkr"]
 
 [ext_resource type="PackedScene" uid="uid://wny2d8dvp3ok" path="res://addons/maaacks_game_template/base/scenes/overlaid_menu/overlaid_menu.tscn" id="1_sjjon"]
+[ext_resource type="Texture2D" uid="uid://qji6oyf0n17u" path="res://assets/images/ammo-pickup.png" id="2_84g2x"]
+[ext_resource type="Texture2D" uid="uid://b3nwxepf1ydqy" path="res://assets/images/boost-pickup.png" id="3_p3rle"]
+[ext_resource type="Texture2D" uid="uid://dryhx21bmkuyy" path="res://assets/images/armor-pickup.png" id="4_6n4xs"]
+[ext_resource type="Texture2D" uid="uid://q7itioqbr5dx" path="res://assets/images/resource-pickup.png" id="5_8sgpn"]
+[ext_resource type="Texture2D" uid="uid://bwastej6k2o8y" path="res://assets/images/bottom-ui.png" id="6_eri0h"]
 
 [node name="Tutorial2" instance=ExtResource("1_sjjon")]
 process_mode = 3
 pauses_game = true
 
 [node name="MenuPanelContainer" parent="." index="1"]
-offset_left = -206.0
-offset_top = -75.0
-offset_right = 215.0
-offset_bottom = 76.0
+offset_left = -210.5
+offset_top = -158.5
+offset_right = 210.5
+offset_bottom = 158.5
 
 [node name="BoxContainer" parent="MenuPanelContainer/MarginContainer" index="0"]
 theme_override_constants/separation = 16
 
 [node name="TitleLabel" parent="MenuPanelContainer/MarginContainer/BoxContainer/TitleMargin" index="0"]
-text = "Collecting and Expanding"
+text = "Pickups"
 
 [node name="DescriptionMargin" parent="MenuPanelContainer/MarginContainer/BoxContainer" index="1"]
 visible = true
 
 [node name="DescriptionLabel" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin" index="0"]
+visible = false
 text = "[center]Your station will launch [b]power ups[/b] at your ship from the nodes and center.
 
 Asteroids drop [b]raw materials[/b] that you can bring back to your station center to [i]expand[/i] it.
@@ -32,3 +38,72 @@ Resources are shown in the bottom left:
 [color=violet]Raw Material[/color]
 [/center]"
 fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin" index="1"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer" index="0"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer3" index="0"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Ammo"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer3" index="1"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Boost"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer3" index="2"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Health"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer3" index="3"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Resource"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer" index="1"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="AmmoPickup" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer" index="0"]
+layout_mode = 2
+texture = ExtResource("2_84g2x")
+stretch_mode = 3
+
+[node name="BoostPickup" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer" index="1"]
+layout_mode = 2
+texture = ExtResource("3_p3rle")
+stretch_mode = 3
+
+[node name="ArmorPickup" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer" index="2"]
+layout_mode = 2
+texture = ExtResource("4_6n4xs")
+stretch_mode = 3
+
+[node name="ResourcePickup" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer" index="3"]
+layout_mode = 2
+texture = ExtResource("5_8sgpn")
+stretch_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer" index="2"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="TextureRect" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/MarginContainer" index="0"]
+layout_mode = 2
+texture = ExtResource("6_eri0h")
+expand_mode = 5

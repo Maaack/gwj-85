@@ -1,16 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4fpfp685nnh6"]
+[gd_scene load_steps=8 format=3 uid="uid://d4fpfp685nnh6"]
 
 [ext_resource type="PackedScene" uid="uid://wny2d8dvp3ok" path="res://addons/maaacks_game_template/base/scenes/overlaid_menu/overlaid_menu.tscn" id="1_b2dkv"]
+[ext_resource type="Texture2D" uid="uid://b37ct3uty8s1o" path="res://assets/kenney_input-prompts/Keyboard & Mouse/Default/keyboard_arrows_none.png" id="2_sqejw"]
+[ext_resource type="Texture2D" uid="uid://s486e14prwpw" path="res://assets/kenney_input-prompts/Keyboard & Mouse/Default/keyboard_z_outline.png" id="3_b1mvc"]
+[ext_resource type="Texture2D" uid="uid://d2kvb3nifjdkh" path="res://assets/kenney_input-prompts/Keyboard & Mouse/Default/keyboard_x_outline.png" id="4_05k03"]
+[ext_resource type="Texture2D" uid="uid://ck7dp03ra7gm2" path="res://assets/kenney_input-prompts/Xbox Series/Default/xbox_stick_l.png" id="5_vddqr"]
+[ext_resource type="Texture2D" uid="uid://byhwf1npgejfc" path="res://assets/kenney_input-prompts/Xbox Series/Default/xbox_lt_outline.png" id="6_jo2r0"]
+[ext_resource type="Texture2D" uid="uid://cif16a0dgmfkw" path="res://assets/kenney_input-prompts/Xbox Series/Default/xbox_button_color_a_outline.png" id="7_0py2d"]
 
 [node name="Tutorial1" instance=ExtResource("1_b2dkv")]
 process_mode = 3
 pauses_game = true
 
 [node name="MenuPanelContainer" parent="." index="1"]
-offset_left = -206.0
-offset_top = -75.0
-offset_right = 215.0
-offset_bottom = 76.0
+offset_left = -210.5
+offset_top = -157.5
+offset_right = 210.5
+offset_bottom = 157.5
 
 [node name="BoxContainer" parent="MenuPanelContainer/MarginContainer" index="0"]
 theme_override_constants/separation = 16
@@ -22,13 +28,66 @@ text = "Moving"
 visible = true
 
 [node name="DescriptionLabel" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin" index="0"]
-text = "[center]Control with Arrow Keys, Z and X,
-or WASD, Space, and Shift.
-
-You are always moving,
-and diagonal movement is also possible.
-
-You can fly over your station.
-You [b]cannot[/b] fly over enemy stations.
-[/center]"
+visible = false
+text = "[center]"
 fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin" index="1"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer" index="0"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer3" index="0"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Direction"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer3" index="1"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Shoot"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer3" index="2"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Boost"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer" index="1"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="KeyboardArrowsNone" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer" index="0"]
+layout_mode = 2
+texture = ExtResource("2_sqejw")
+stretch_mode = 3
+
+[node name="KeyboardZOutline" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer" index="1"]
+layout_mode = 2
+texture = ExtResource("3_b1mvc")
+
+[node name="KeyboardXOutline" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer" index="2"]
+layout_mode = 2
+texture = ExtResource("4_05k03")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer" index="2"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="XboxStickL" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer2" index="0"]
+layout_mode = 2
+texture = ExtResource("5_vddqr")
+
+[node name="XboxLtOutline" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer2" index="1"]
+layout_mode = 2
+texture = ExtResource("6_jo2r0")
+
+[node name="XboxButtonColorAOutline" type="TextureRect" parent="MenuPanelContainer/MarginContainer/BoxContainer/DescriptionMargin/VBoxContainer/HBoxContainer2" index="2"]
+layout_mode = 2
+texture = ExtResource("7_0py2d")
